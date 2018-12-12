@@ -95,4 +95,8 @@ void mini_quintupla(quintupla_t *q, char *lei);
 void AFND_AFD_init(const char *entrada);
 void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo);
 void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo);
+int novo_estado(lest_t *list, lconj_t **conj_estados); /*gera um estado para afd*/
+
+
+
 
