@@ -93,3 +93,4 @@ void copia_lestado(lest_t **dest, lest_t *list);
 void copia_ltrans(ltrans_t **dest, ltrans_t *list);
 void mini_quintupla(quintupla_t *q, char *lei);
 void AFND_AFD_init(const char *entrada);
+void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo);
