@@ -540,6 +540,39 @@ void AFND_AFD_init(const char *entrada)
 }
 
 /**
+ * @brief gera um lista de conjuntos de estados simultaneos
+ * @param [in] Q armazena a quintupla AFND
+ * @param [out] armazena a lista de conjntos de estados simultaneos
+ * @return
+ **/
+void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo)
+{
+    lconj_t *plconj;
+    ltrans_t *plsimul;
+    lest_t *plest;
+    int i;
+
+    for(i=0; i<Q.K; i++)
+    {
+        insere_conjunto(simultaneo, i);
+        plconj = busca_conjunto(*simultaneo, i);
+        insere_estado(&plconj->estados, i);
+        plest= plconj->estados;
+        while(plest!= NULL)
+        {
+            plsimul= Q.D;
+            while((plsimul= busca_simultaneo(plsimul, plest->estado)) != NULL)
+            {
+                insere_estado(&plconj->estados, plsimul->ef);
+                plsimul= plsimul->prox;
+            }
+            plest= plest->prox;
+        }
+    }
+    return;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
