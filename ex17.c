@@ -501,6 +501,12 @@ void copia_ltrans(ltrans_t **dest, ltrans_t *list)
         
         return;
 }
+/**
+ * @brief constroi uma quintupla simples, com apenas um transicao possivel, exemplos de expressoes regular -> "a", "b" ou "c" ...
+ * @param [out] q armazena aq quintupla contruida
+ * @param [in] lei minima expressao regular
+ **/
+
 void mini_quintupla(quintupla_t *q, char *lei)
 {
     q->K= 2;
