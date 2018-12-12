@@ -215,19 +215,21 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
         {
             if(expReg[j] == '(') /* para caso esteja entrando no parentese onde torna a expressao prioritaria*/
                 parentese++;
-            else if(expReg[j] == ')')
+            else if(expReg[j] == ')') /* saindo do parentese */
                 parentese--;
-            else if (expReg[j] == operadores[i] && parentese == 0)
+            else if (expReg[j] == operadores[i] && parentese == 0) /* verificando se entrou o operador, caso nao esteja dentro do parentese */
             {
                 separador(expReg, &partEsq, &partDir, op, j);
 
                 insere_arvore(raiz, *raiz, op);
 
+                /* caso foi alcancado uma expressao minima */
                 if(strlen(partEsq) == 1)
                     insere_arvore(raiz, *raiz, partEsq);
                 else
                     quebraExpressao(partEsq, raiz);
 
+                /* caso foi alcancado uma expressao minima */
                 if(strlen(partDir) == 1)
                     insere_arvore(raiz, *raiz, partDir);
                 else
