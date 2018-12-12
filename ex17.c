@@ -442,6 +442,14 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
     /* Os finais que se ligam com os iniciais formando a estrela */
     transicoes_finais(&res-> D, q.F, q.S);
 }
+
+/**
+ *@brief Gera transicoes onde os estados finais deixam de ser estados finais e mudam para um novo
+ *@param [out] dest Local de armazenamento das transicoes
+ *@param [in] list Lista de estados finais
+ *@param [in] novoFinal estado novo a trasnformar final
+ */
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
