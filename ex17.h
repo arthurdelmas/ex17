@@ -98,3 +98,5 @@ void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo)
 int novo_estado(lest_t *list, lconj_t **conj_estados); /*gera um estado para afd*/
 void modelando_conjunto(lconj_t *simultaneo, lest_t **list);
 int igualdade_conjunto(lest_t *list, lest_t *list2);
+void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Copia estados para um conjunto de estados*/
+
