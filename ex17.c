@@ -660,6 +660,12 @@ int novo_estado(lest_t *list, lconj_t **conj_estados)
     return id;
 }    
 
+/**
+ * @brief tranforma um conjunto de indices dos estados simultaneos para um conjunto de estados
+ * @param [in] simultaneo lista de conjuntos dos estados simultaneos
+ * @param [in,out] list inicia com conjunto de indices dos estados simultanes e termina como conjunto de estados
+ * @return
+ */
 void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
 {
     lest_t *plest= *list;
