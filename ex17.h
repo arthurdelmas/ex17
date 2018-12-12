@@ -82,3 +82,6 @@ void copyr(void); /* print version and copyright information */
 void exN_init(void); /* global initialization function */
 int tipo_operador(char info)
 void quebraExpressao(char *expReg, t_arvore **raiz); /*quebra a expressao e armazena na arvore binaria*/    
+void separador(char *expReg, char **partEsq, char **partDir, char *op, int size); /*separa a expressao regular no ponto pre determinado*/
+
+
