@@ -214,7 +214,13 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
         for(j=0; j<strlen(expReg); j++) /*expressao escolhida, de baixa prioridade para alta*/
         {
             if(expReg[j] == '(') /* para caso esteja entrando no parentese onde torna a expressao prioritaria*/
-                parente++;
+                parentese++;
+            else if(expReg[j] == ')')
+                parentese--;
+            else if (expReg[j] == operadores[i] && parentese == 0)
+            {
+
+            }
         }
      }
      return;
