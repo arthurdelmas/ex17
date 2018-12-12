@@ -287,7 +287,11 @@ void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
 
     return;
 }
+void transformacao(t_arvore *raiz)
+{
+    t_arvore *pl= raiz;
 
+}
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
