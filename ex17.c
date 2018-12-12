@@ -228,6 +228,12 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
                 else
                     quebraExpressao(partEsq, raiz);
 
+                if(strlen(partDir) == 1)
+                    insere_arvore(raiz, *raiz, partDir);
+                else
+                    quebraExpressao(partDir, raiz);
+                
+                return;
             }
         }
      }
