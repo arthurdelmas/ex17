@@ -449,7 +449,11 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
  *@param [in] list Lista de estados finais
  *@param [in] novoFinal estado novo a trasnformar final
  */
+void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal)
+{
 
+    return;
+}
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
