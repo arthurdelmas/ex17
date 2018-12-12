@@ -486,6 +486,11 @@ void copia_lestado(lest_t **dest, lest_t *list)
      }
     return;
 }
+/**
+ * @brief copia uma lista de transicoes
+ * @param [out] dest lista a armazenar
+ * @param [in] list lista a ser copiada
+ * */
 void copia_ltrans(ltrans_t **dest, ltrans_t *list)
 {
     while(list!= NULL)
