@@ -417,7 +417,15 @@ void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2)
 
     return;
 }
+void operacao_estrela(quintupla_t *res, quintupla_t q)
+{
+    /* Estados, Alfabeto e Estado Inicial sao mantidos*/
 
+    res->K= q.K;
+    res->A= q.A;
+    res->S= q.S;
+
+}
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
