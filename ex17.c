@@ -682,6 +682,41 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
 }
 
 /**
+ * @brief verificar se dois conjuntos sao iguais
+ * @param [in] list conjunto de estados
+ * @param [in] list2 conjunto de estados
+ * @return verdadeiro ou falso
+ */
+
+int igualdade_conjunto(lest_t *list, lest_t *list2)
+{
+    lest_t *pl= list, *pl2= list2;
+
+    while(1)
+    {
+        if(!pl)
+        {
+            if(!pl2)
+                break;
+            else
+                return 0;
+        }
+        else
+        {
+            if(!pl2)
+                return 0;
+        }
+
+        if(pl->estado != pl2->estado)
+            return 0;
+        pl= pl->prox;
+        pl2= pl2->prox;
+    }
+
+    return 1;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
