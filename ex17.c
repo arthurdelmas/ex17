@@ -327,6 +327,33 @@ void transformacao(t_arvore *raiz)
     return;
 }
 
+/**
+ * @brief realiza qualquer operacao dada
+ * @param [out] res resultado da operacao
+ * @param [in] q1 quintupla 1
+ * @param [in] q2 quintupla 2
+ * @param [in] op operador
+ */
+
+void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op)
+{
+    switch(op)
+    {
+        case '.':
+            operacao_e(res, q1, q2);
+            break;
+        case '|':
+            operacao_ou(res, q1, q2);
+            break;
+        case '*':
+            operacao_estrela(res, q1);
+            break;
+        default:
+            printf("\n\nErro!!!, operador nao existe %c\n\n", op);
+    }
+    return;
+}
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
