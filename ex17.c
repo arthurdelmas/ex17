@@ -520,7 +520,24 @@ void mini_quintupla(quintupla_t *q, char *lei)
     return;
 }
 
+void AFND_AFD_init(const char *entrada)
+{
+    IFDEBUG("exN_init()");
+    /* initialization */
 
+    quintupla_t Qafnd, Qafd;
+    lconj_t *simultaneo= NULL;
+
+    entrada_Automato(&Qafnd, entrada);
+    estados_simultaneos(Qafnd, &simultaneo);
+
+    estados_novos(Qafnd, &Qafd, simultaneo);
+
+    salva_quintupla(Qafd, NULL);
+    salva_quintupla(Qafd, "saida.txt");
+
+    return;
+}
 
 /**
  * @ingroup GroupUnique
