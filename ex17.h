@@ -90,3 +90,4 @@ void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao ou
 void operacao_estrela(quintupla_t *res, quintupla_t q); /* operacao estrela */
 void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal); /*Gera transicoes que dao novos estados para os estados finais*/
 void copia_lestado(lest_t **dest, lest_t *list);
+void copia_ltrans(ltrans_t **dest, ltrans_t *list);
