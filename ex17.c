@@ -472,6 +472,16 @@ void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal)
 
 return;
 }
+void copia_lestado(lest_t **dest, lest_t *list)
+{
+    while(list!= NULL)
+     {
+         insere_estado(dest, list->estado);
+         list= list->prox;
+     }
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
