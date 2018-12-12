@@ -733,7 +733,8 @@ void copia_estado(lest_t **estados, lconj_t *simultaneo, int s)
  */ 
 void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
 {
-    
+    copia_estado(estados, simultaneo, s);
+    return;
 }
 
 /**
