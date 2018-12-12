@@ -687,7 +687,6 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
  * @param [in] list2 conjunto de estados
  * @return verdadeiro ou falso
  */
-
 int igualdade_conjunto(lest_t *list, lest_t *list2)
 {
     lest_t *pl= list, *pl2= list2;
@@ -714,6 +713,17 @@ int igualdade_conjunto(lest_t *list, lest_t *list2)
     }
 
     return 1;
+}
+
+/**
+ *@brief
+ *@param
+ *@param
+ *@param
+ */
+void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
+{
+
 }
 
 /**
