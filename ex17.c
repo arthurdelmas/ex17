@@ -219,7 +219,9 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
                 parentese--;
             else if (expReg[j] == operadores[i] && parentese == 0)
             {
+                separador(expReg, &partEsq, &partDir, op, j);
 
+                insere_arvore(raiz, *raiz, op);
             }
         }
      }
