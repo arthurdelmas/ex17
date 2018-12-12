@@ -307,6 +307,12 @@ void transformacao(t_arvore *raiz)
 
     transformacao(pl -> esq);
     /* caso o operador seja unario, o operador apenas opera com o ramo esquerdo (predefinindo a escolha)*/
+
+    if(pl -> tipo_op == 1)
+    {
+        operacao_geral(&pl->Q, pl->esq->Q, pl->esq->Q, pl->expReg[0]);
+        return;
+    }
 }
 /* ---------------------------------------------------------------------- */
 /**
