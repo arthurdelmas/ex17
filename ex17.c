@@ -172,9 +172,27 @@ int main(int argc, char *argv[])
         printf("Verbose level set at: %d\n", verb);
     /* ...and we are done */
 
-    exN_init(); /* global initialization function: ainda a saber para que usar se precisar */
+//    exN_init(); /* global initialization function: ainda a saber para que usar se precisar */
 
     return EXIT_SUCCESS;
+}
+/* ---------------------------------------------------------------------- */
+/**
+ * @ingroup GroupUnique
+ * @brief This function initializes some operations before start
+ * @details Details to be written
+ * @return Void
+ * @todo Need to implement it. Its empty now.
+ * @author Ruben Carlo Benante
+ * @version 20160609.110101
+ * @date 2016-06-09
+ *   
+ */
+void exN_init(void)
+{
+    IFDEBUG("exN_init()");
+     /* initialization */
+     return;
 }
 
 /**
@@ -196,13 +214,6 @@ int tipo_operador(char info)
  * @param [in] expReg Expressao Regular
  * @param [out] raiz Arvore Binaria
  */
-
-/**
- * @brief responsavel em quebra a Expressao Regular em expressoes miminas, e armazenando numa arvore binaria
- * @param [in] expReg Expressao Regular
- * @param [out] raiz Arvore Binaria
- */
-
 void quebraExpressao(char *expReg, t_arvore **raiz)
 {
     const int nOp= 3; /*numero de operadores*/
@@ -459,9 +470,8 @@ void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal)
         pl=pl->prox;
     }
 
-    return;
+return;
 }
-/* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
@@ -506,25 +516,6 @@ void copyr(void)
     printf("\nCopyright (C) %d %s <%s>, GNU GPL version 2 <http://gnu.org/licenses/gpl.html>. This  is  free  software:  you are free to change and redistribute it. There is NO WARRANTY, to the extent permitted by law. USE IT AS IT IS. The author takes no responsability to any damage this software may inflige in your data.\n\n", 2016, "Ruben Carlo Benante", "rcb@beco.cc");
     if(verb>3) printf("copyr(): Verbose: %d\n", verb); /* -vvvv */
     exit(EXIT_FAILURE);
-}
-
-/* ---------------------------------------------------------------------- */
-/**
- * @ingroup GroupUnique
- * @brief This function initializes some operations before start
- * @details Details to be written
- * @return Void
- * @todo Need to implement it. Its empty now.
- * @author Ruben Carlo Benante
- * @version 20160609.110101
- * @date 2016-06-09
- *
- */
-void exN_init(void)
-{
-    IFDEBUG("exN_init()");
-    /* initialization */
-    return;
 }
 
 /* ---------------------------------------------------------------------- */
