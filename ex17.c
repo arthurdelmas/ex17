@@ -618,8 +618,22 @@ void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo)
                 }
                 plest= plest->prox;
             }
-            return;
 
+            if(list!= NULL)
+            {
+                modelando_conjunto(simultaneo, &list);
+                estado= novo_estado(list, &conj_estados);
+                Qnovo->K= estado+1 > Qnovo->K ? estado+1 : Qnovo->K;
+                insere_transicao(&Qnovo->D, plconj->id, slei, estado);
+            }
+            apaga_estados(&list);
+        }
+        plconj= plconj->prox;
+   }
+   definir_final(conj_estados, Qantigo.F, &Qnovo->F);
+   apaga_conjunto(&conj_estados);
+   return;
+}
 
 /**
  * @ingroup GroupUnique
