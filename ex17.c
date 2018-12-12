@@ -660,6 +660,21 @@ int novo_estado(lest_t *list, lconj_t **conj_estados)
     return id;
 }    
 
+void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
+{
+    lest_t *plest= *list;
+    
+    *list= NULL;
+
+    while(plest!= NULL)
+    {
+        copia_estado(list, simultaneo, plest->estado);
+        plest= plest->prox;
+    }
+
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
