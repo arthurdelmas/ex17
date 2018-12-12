@@ -314,7 +314,19 @@ void transformacao(t_arvore *raiz)
     }
     else
         transformacao(pl->dir);
+    
+    /*operador binario*/
+    if(pl->tipo_op==2)
+    {
+        operacao_geral(&pl->Q, pl->esq->Q, pl->dir->Q, pl->expReg[0]);
+        return;
+    }
+
+    /*não operador(ER minima)*/
+    mini_quintupla(&pl->Q, pl->expReg);
+    return;
 }
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
