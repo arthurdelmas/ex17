@@ -291,6 +291,12 @@ void transformacao(t_arvore *raiz)
 {
     t_arvore *pl= raiz;
 
+    /* parada da recursividade */
+    if(!pl)
+        return;
+
+    transformacao(pl -> esq);
+    /* caso o operador seja unario, o operador apenas opera com o ramo esquerdo (predefinindo a escolha)*/
 }
 /* ---------------------------------------------------------------------- */
 /**
