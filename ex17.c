@@ -241,7 +241,17 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
      }
      return;
 
-}    
+}
+
+/**
+ * @brief Separar a expressao regular no ponto pre determinado
+ * @param [in] expReg ER(expressao regular)
+ * @param [out] partEsc parte esquerda da ER
+ * @param [out] partDir parte direita da ER
+ * @param [in] size ponto de bisseccao
+ */
+
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
