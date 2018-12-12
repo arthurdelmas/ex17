@@ -425,6 +425,11 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
     res->A= q.A;
     res->S= q.S;
 
+    res->F= NULL;
+    /* Estados Finais sao mantidos e o estado inicial passa ser final tambem */
+    copia_lestado(&res->F, q.F);
+    insere_estado(&res->F, q.S);
+
 }
 /* ---------------------------------------------------------------------- */
 /**
