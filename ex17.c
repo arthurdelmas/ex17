@@ -472,6 +472,11 @@ void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal)
 
 return;
 }
+/**
+ * @brief copia uma lista de estados
+ * @param [out] dest lista a armazenar
+ * @param [in] list lista a ser copiada
+ * */
 void copia_lestado(lest_t **dest, lest_t *list)
 {
     while(list!= NULL)
