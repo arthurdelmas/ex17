@@ -390,21 +390,34 @@ void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2)
 
 void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2)
 {
-    /* eh adicionado mais dois estados alem dos que ja exitem nas quintuplas q1 e q2*/
+    /*eh adicionado mais dois estados alem dos que ja exitem nas quintuplas q1 e q2*/
     res->K= q1.K + q2.K + 2;
     res->A= q1.A > q2.A ? q1.A : q2.A; /* prevalece o maior alfabeto*/
-    res->S= id_estado; /* o estado inicial eh um dos novos estados adicionados*/
+    res->S= id_estado; /*o estado inicial eh um dos novos estados adicionados*/
     char lei[]= "E";
 
     res->F= NULL;
-    insere_estado(&res->F, id_estado+1); /* o estado final eh um dos novos estados adicionados*/
+    insere_estado(&res->F, id_estado+1); /*o estado final eh um dos novos estados adicionados*/
 
     res->D= NULL;
     /*As transicoes de q1 e q2 sao mantidas*/
     copia_ltrans(&res->D, q1.D);
     copia_ltrans(&res->D, q2.D);
 
+    /*o novo estado inicial eh conectado aos antigos estados inicial de q1 e q2*/
+    insere_transicao(&res->D, res->S, lei, q1.S);
+    insere_transicao(&res->D, res->S, lei, q2.S);
+
+    /*O novo estado final eh conectado com os antigos estados finais de q1 e q2*/
+    transicoes_finais(&res->D, q1.F, res->F->estado);
+    transicoes_finais(&res->D, q2.F, res->F->estado);
+
+    /*atualizando os estados totais*/
+    id_estado+= 2;
+
     return;
+}
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
