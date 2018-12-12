@@ -80,4 +80,4 @@ typedef struct st_quintupla
 void help(void); /* print some help */
 void copyr(void); /* print version and copyright information */
 void exN_init(void); /* global initialization function */
-
+int tipo_operador(char info)
