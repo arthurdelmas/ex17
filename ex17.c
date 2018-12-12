@@ -573,6 +573,55 @@ void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo)
 }
 
 /**
+ * @brief gera a quintupla AFD
+ * @param [in] Qantigo armazena a quintupla AFND
+ * @param [in] simultaneo lista de conjuntos dos estados simultaneos
+ * @param [out] Qnovo armazena a quintupla AFD gerada
+ * @return
+ */
+
+void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo)
+{
+    int estado;
+    char lei, slei[2];
+    lconj_t *conj_estados= NULL, *plconj;
+    lest_t *plest, *list= NULL;
+    ltrans_t *pltrans;
+
+    Qnovo->A= Qantigo.A;
+    Qnovo->D= NULL;
+    Qnovo->F= NULL;
+
+    insere_conjunto(&conj_estados, 0);
+
+    plconj= busca_conjunto(conj_estados, 0);
+    primeiro_estado(&plconj->estados, simultaneo, Qantigo.S);
+    Qnovo->S= 0;
+    Qnovo->K= 1;
+
+    while(plconj!= NULL)
+    {
+        for(lei='a'; lei <= Qantigo.A; ++lei)
+        {
+            pltrans= Qantigo.D;
+            slei[0]= lei;
+            slei[1]= '\0';
+
+            plest= plconj->estados;
+            list= NULL;
+            while(plest!= NULL)
+            {
+                while((pltrans= busca_transicao(pltrans, plest->estado, slei))!= NULL)
+                {
+                    insere_estado(&list, pltrans->ef);
+                    pltrans= pltrans->prox;
+                }
+                plest= plest->prox;
+            }
+            return;
+
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
