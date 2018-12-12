@@ -91,3 +91,4 @@ void operacao_estrela(quintupla_t *res, quintupla_t q); /* operacao estrela */
 void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal); /*Gera transicoes que dao novos estados para os estados finais*/
 void copia_lestado(lest_t **dest, lest_t *list);
 void copia_ltrans(ltrans_t **dest, ltrans_t *list);
+void mini_quintupla(quintupla_t *q, char *lei);
