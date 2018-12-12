@@ -254,6 +254,8 @@ void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
 {
     char *esq, *dir;
     
+    esq=malloc((size+1)*sizeof(char));
+    dir=malloc((strlen(expReg)-size)*sizeof(char));
 
     return;
 }
