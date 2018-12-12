@@ -85,3 +85,9 @@ void quebraExpressao(char *expReg, t_arvore **raiz); /*quebra a expressao e arma
 void separador(char *expReg, char **partEsq, char **partDir, char *op, int size); /*separa a expressao regular no ponto pre determinado*/
 void transformacao(t_arvore *raiz); /* realiza as operacoes de acordo com a arvore binaria, na ordem pos ordem */
 void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op)
+void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao concatenacao*/
+
+
+
+
+
