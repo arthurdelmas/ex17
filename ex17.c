@@ -486,6 +486,16 @@ void copia_lestado(lest_t **dest, lest_t *list)
      }
     return;
 }
+void copia_ltrans(ltrans_t **dest, ltrans_t *list)
+{
+    while(list!= NULL)
+    {
+        insere_transicao(dest, list->ei, list->lei, list->ef);
+        list= list->prox;
+    }
+        
+        return;
+}
 
 /**
  * @ingroup GroupUnique
