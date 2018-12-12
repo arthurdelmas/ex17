@@ -430,6 +430,9 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
     copia_lestado(&res->F, q.F);
     insere_estado(&res->F, q.S);
 
+    res->D= NULL;
+    copia_ltrans(&res->D, q.D);
+    transicoes_finais(&res-> D, q.F, q.S);
 }
 /* ---------------------------------------------------------------------- */
 /**
