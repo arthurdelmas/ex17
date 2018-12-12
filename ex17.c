@@ -190,8 +190,24 @@ int tipo_operador(char info)
     if(info == '*')
         return 1;
     return 0;
-}
+} 
+/**
+ * @brief responsavel em quebra a expressao regular em expressoes minimas, e armazenando numa arvore binaria
+ * @param [in] expReg Expressao Regular
+ * @param [out] raiz Arvore Binaria
+ */
 
+void quebraExpressao(char *expReg, t_arvore **raiz)
+{
+    const int nOp= 3; /*numero de operadores*/
+    char operadores[3] = { '|', '.', '*'} /*operadores em ordem crescente de prioridade*/,
+         *op = malloc(2*sizeof(char)) /*operador*/,
+         *partEsq, *partDir; /*Quebra da expressoes partes esquerda e direita*/
+    int i, parentese= 0 /*parentese aberto*/;
+    size_t j;
+
+    return;
+}    
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
