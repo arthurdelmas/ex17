@@ -451,6 +451,13 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
  */
 void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal)
 {
+    lest_t *pl = list;
+
+    while(pl!=NULL)
+    {
+        insere_transicao(dest, pl->estado, "E", novoFinal);
+        pl=pl->prox;
+    }
 
     return;
 }
