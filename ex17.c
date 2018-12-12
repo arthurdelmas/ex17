@@ -222,6 +222,12 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
                 separador(expReg, &partEsq, &partDir, op, j);
 
                 insere_arvore(raiz, *raiz, op);
+
+                if(strlen(partEsq) == 1)
+                    insere_arvore(raiz, *raiz, partEsq);
+                else
+                    quebraExpressao(partEsq, raiz);
+
             }
         }
      }
