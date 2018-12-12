@@ -417,6 +417,12 @@ void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2)
 
     return;
 }
+/**
+ * @brief realiza a operacao estrela
+ * @param [out] res resultado da operacao
+ * @param [in] q quintupla
+ */
+
 void operacao_estrela(quintupla_t *res, quintupla_t q)
 {
     /* Estados, Alfabeto e Estado Inicial sao mantidos*/
