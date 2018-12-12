@@ -368,6 +368,15 @@ void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2)
     res->S= q1.S; /* estado inicial de q1 prevalece */
 
     res->F= NULL;
+    copia_lestado(&res->F, q2.F); /*os estados finais de q2 prevalece*/
+
+    /*ambas as transicoes de q1 e q2 sao mantidas e eh adicionado transicoes*/
+    res->D= NULL;
+    copia_ltrans(&res->D, q1.D);
+    copia_ltrans(&res->D, q2.D);
+
+    /*transicoes adicionadas sao as que vao unir os finais de q1 com o inicial de q2*/
+    transicoes_finais(&res->D, q1.F, q2.S);
 
     return;
 }    
