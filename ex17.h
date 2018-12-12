@@ -87,7 +87,5 @@ void transformacao(t_arvore *raiz); /* realiza as operacoes de acordo com a arvo
 void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op)
 void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao concatenacao*/
 void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2)/*operacao ou*/
-
-
-
+void operacao_estrela(quintupla_t *res, quintupla_t q) /* operacao estrela */
 
