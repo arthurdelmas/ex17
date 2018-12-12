@@ -715,15 +715,27 @@ int igualdade_conjunto(lest_t *list, lest_t *list2)
     return 1;
 }
 
+
 /**
  *@brief
+ *@param 
  *@param
  *@param
- *@param
- */
-void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
+ */ 
+void copia_estado(lest_t **estados, lconj_t *simultaneo, int s)
 {
 
+}
+
+/**
+ *@brief
+ *@param 
+ *@param
+ *@param
+ */ 
+void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
+{
+    
 }
 
 /**
