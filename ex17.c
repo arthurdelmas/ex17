@@ -197,6 +197,12 @@ int tipo_operador(char info)
  * @param [out] raiz Arvore Binaria
  */
 
+/**
+ * @brief responsavel em quebra a Expressao Regular em expressoes miminas, e armazenando numa arvore binaria
+ * @param [in] expReg Expressao Regular
+ * @param [out] raiz Arvore Binaria
+ */
+
 void quebraExpressao(char *expReg, t_arvore **raiz)
 {
     const int nOp= 3; /*numero de operadores*/
