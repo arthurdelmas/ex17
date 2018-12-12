@@ -88,4 +88,4 @@ void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op)
 void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao concatenacao*/
 void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2)/*operacao ou*/
 void operacao_estrela(quintupla_t *res, quintupla_t q) /* operacao estrela */
-
+void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal) /*Gera transicoes que dao novos estados para os estados finais*/
