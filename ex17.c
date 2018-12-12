@@ -431,7 +431,9 @@ void operacao_estrela(quintupla_t *res, quintupla_t q)
     insere_estado(&res->F, q.S);
 
     res->D= NULL;
+    /* Transicoes sao mantidas */
     copia_ltrans(&res->D, q.D);
+    /* Os finais que se ligam com os iniciais formando a estrela */
     transicoes_finais(&res-> D, q.F, q.S);
 }
 /* ---------------------------------------------------------------------- */
