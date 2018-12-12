@@ -246,11 +246,17 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
 /**
  * @brief Separar a expressao regular no ponto pre determinado
  * @param [in] expReg ER(expressao regular)
- * @param [out] partEsc parte esquerda da ER
+ * @param [out] partEsq parte esquerda da ER
  * @param [out] partDir parte direita da ER
  * @param [in] size ponto de bisseccao
  */
+void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
+{
+    char *esq, *dir;
+    
 
+    return;
+}
 
 /* ---------------------------------------------------------------------- */
 /**
