@@ -92,3 +92,4 @@ void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal); /*Gera tra
 void copia_lestado(lest_t **dest, lest_t *list);
 void copia_ltrans(ltrans_t **dest, ltrans_t *list);
 void mini_quintupla(quintupla_t *q, char *lei);
+void AFND_AFD_init(const char *entrada);
