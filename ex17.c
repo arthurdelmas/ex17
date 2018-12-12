@@ -354,6 +354,23 @@ void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op)
     return;
 }
 
+/**
+ * @brief realiza a operacao concatenacao
+ * @param [out] res resultado da operacao
+ * @param [in] q1 quintupla 1
+ * @param [in] q2 quintupla 2
+ */
+
+void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2)
+{
+    res->K= q1.K + q2.K;
+    res->A= q1.A > q2.A ? q1.A : q2.A; /* a lei maior prevalece, sendo, a < b < c < d ...  */
+    res->S= q1.S; /* estado inicial de q1 prevalece */
+
+    res->F= NULL;
+
+    return;
+}    
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
