@@ -177,6 +177,21 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
+/**
+ * @brief identifica o tipo da informacao: nao operador, operador unario ou operador binario
+ * @param [in] info informacao
+ * @return 0 p/ nao operador, 1 p/ operador unario, 2 p/ operador binario
+ */
+
+int tipo_operador(char info)
+{
+    if(info == '.' || info == '|')
+        return 2;
+    if(info == '*')
+        return 1;
+    return 0;
+}
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
