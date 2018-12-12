@@ -287,6 +287,10 @@ void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
 
     return;
 }
+/**
+ * @brief realiza as operacoes de acordo com a arvore binaria, na ordem pos ordem
+ * @param [in] raiz arvore binaria
+ */
 void transformacao(t_arvore *raiz)
 {
     t_arvore *pl= raiz;
