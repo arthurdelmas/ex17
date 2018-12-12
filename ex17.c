@@ -205,8 +205,20 @@ void quebraExpressao(char *expReg, t_arvore **raiz)
          *partEsq, *partDir; /*Quebra da expressoes partes esquerda e direita*/
     int i, parentese= 0 /*parentese aberto*/;
     size_t j;
+    
+    if(!expReg)
+        return;
+    /*Procurando pelo operador de menor prioridade, sera o ponto de bisseccao da expressao*/
+    for(i=0; i<nOp; i++)
+    {
+        for(j=0; j<strlen(expReg); j++) /*expressao escolhida, de baixa prioridade para alta*/
+        {
+            if(expReg[j] == '(') /* para caso esteja entrando no parentese onde torna a expressao prioritaria*/
+                parente++;
+        }
+     }
+     return;
 
-    return;
 }    
 /* ---------------------------------------------------------------------- */
 /**
