@@ -256,6 +256,20 @@ void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
     
     esq=malloc((size+1)*sizeof(char));
     dir=malloc((strlen(expReg)-size)*sizeof(char));
+    
+    strncpy(esq, expReg, size);
+    esq[size] = '\0';
+    strcpy(dir, expReg+size+1);
+         
+    /*
+     *Retirar os parenteses no caso da expressao regular esteja contida nelas
+    */
+
+    *partEsq=esq;
+    *partDir=dir;
+
+    op[0]=expReg[size];
+    op[1]='\0';
 
     return;
 }
