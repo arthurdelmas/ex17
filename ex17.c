@@ -723,6 +723,8 @@ int igualdade_conjunto(lest_t *list, lest_t *list2)
  */ 
 void copia_estado(lest_t **estados, lconj_t *simultaneo, int s)
 {
+    lconj_t *plconj = busca_conjunto(simultaneo, s);
+    lest_t *plest = plconj->estados;
 
 }
 
