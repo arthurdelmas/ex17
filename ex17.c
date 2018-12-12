@@ -717,21 +717,19 @@ int igualdade_conjunto(lest_t *list, lest_t *list2)
 
 
 /**
- *@brief
- *@param 
- *@param
- *@param
+ *@brief copia o estado para o conjunto de estados simultaneos
+ *@param [in] estados lista de estados
+ *@param [out] simultaneo lista de estados simultaneos
  */ 
 void copia_estado(lest_t **estados, lconj_t *simultaneo, int s)
 {
 
 }
 
-/**
- *@brief
- *@param 
- *@param
- *@param
+/** 
+ *@brief chama a funcao que copia estado e manda o primeiro estado para a lista de estados simultaneos
+ *@param [in] estados lista de estados
+ *@param [out] simultaneo lista de estados simultaneos
  */ 
 void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
 {
