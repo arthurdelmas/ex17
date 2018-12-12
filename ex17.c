@@ -501,6 +501,20 @@ void copia_ltrans(ltrans_t **dest, ltrans_t *list)
         
         return;
 }
+void mini_quintupla(quintupla_t *q, char *lei)
+{
+    q->K= 2;
+    q->A= lei[0];
+    q->S= id_estado;
+    q->F= NULL;
+    insere_estado(&q->F, id_estado+1);
+    q->D= NULL;
+    insere_transicao(&q->D, id_estado, lei, id_estado+1);
+    id_estado+= 2;
+    return;
+}
+
+
 
 /**
  * @ingroup GroupUnique
