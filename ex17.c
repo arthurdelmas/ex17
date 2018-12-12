@@ -633,7 +633,22 @@ void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo)
    definir_final(conj_estados, Qantigo.F, &Qnovo->F);
    apaga_conjunto(&conj_estados);
    return;
-}
+ }
+
+/**
+ * @brief gera um estado para AFD se caso ainda nao foi gerado
+ * @param [in] list conjunto de estados a se verificar
+ * @param [in,out] conj_estados lista de conjuntos dos estados para AFD
+ * @return o estado que foi criado  ou o estado cujo seu conjunto eh igual a list
+ */
+
+int novo_estado(lest_t *list, lconj_t **conj_estados)
+{
+    int id;
+    lconj_t *plconj= *conj_estados;
+
+    return id;
+}    
 
 /**
  * @ingroup GroupUnique
