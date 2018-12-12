@@ -646,6 +646,16 @@ int novo_estado(lest_t *list, lconj_t **conj_estados)
 {
     int id;
     lconj_t *plconj= *conj_estados;
+    
+    for(id=0; plconj!= NULL; id++)
+    {
+        if(igualdade_conjunto(plconj->estados, list))
+        {
+            return id;
+        }
+        plconj=plconj->prox;
+    }
+    insere_conjuntoFULL(conj_estados, list, id);
 
     return id;
 }    
