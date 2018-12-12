@@ -270,6 +270,20 @@ void separador(char *expReg, char **partEsq, char **partDir, char *op, int size)
 
     op[0]=expReg[size];
     op[1]='\0';
+    
+    /*retira os parenteses caso toda a expressao esteja contida nas mesmas*/
+    if(*esq == '(' && *(esq+strlen(esq)-1) == ')')
+    {
+        esq= esq+1;
+        esq[strlen(esq)-1]= '\0';
+    }
+
+    /*retira os parenteses caso toda a expressao esteja contida nas mesmas*/
+    if(*dir == '(' && dir[strlen(dir)-1] == ')')
+    {
+        dir= dir+1;
+        dir[strlen(dir)-1]= '\0';
+    }
 
     return;
 }
