@@ -1098,7 +1098,16 @@ void entrada_Automato(quintupla_t *Q, const char *entrada)
  */
 void coleta_final(lest_t **list, FILE *stream)
 {
+    char ch[SBUFF], *sch;
 
+    fgets(ch, SBUFF, stream);
+    sch = strtok(ch, " ");
+
+    do
+    {
+        insere_estado(list, atoi(sch));
+    }while((sch = strtok(NULL, " ")) != NULL);
+    
     return;
 }
 
