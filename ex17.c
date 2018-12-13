@@ -799,6 +799,24 @@ void AFD_ER_init(const char *arquivo)
 }
 
 /**
+ * @brief limita a quintupla para apenas uma unica entrada e uma unica saida da AFD
+ * @param [in, out] Q quintupla AFD
+ */
+
+void estados_limite(quintupla_t *Q)
+{
+    lest_t *pl= Q->F;
+    insere_transicao(&Q->D, Q->K, "E", Q->S);
+
+    while(pl!= NULL)
+    {
+        insere_transicao(&Q->D, pl->estado, "E", Q->K+1);
+        pl= pl->prox;
+    }
+    return;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)

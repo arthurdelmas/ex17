@@ -102,7 +102,7 @@ void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Copia estados
 void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Manda o primeiro estado para o conjunto simultaneo*/
 void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list);
 void AFD_ER_init(const char *arquivo);
-
+void estados_limite(quintupla_t *Q);
 
 
 
