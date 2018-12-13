@@ -1174,6 +1174,12 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
     }
     return 0;
 }
+
+ltrans_t *busca_por_ei(ltrans_t *list, int est)
+{
+    return NULL;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
