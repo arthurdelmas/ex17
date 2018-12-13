@@ -1320,6 +1320,34 @@ ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
     return NULL;
 }
 
+void imprime_transicao(ltrans_t *list, FILE *stream)
+{
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        fprintf(stream, "%d %s %d\n", pl->ei, pl->lei, pl->ef);
+        pl= pl->prox;
+    }
+    return;
+}
+
+void imprime_conjunto(lconj_t *list, FILE *stream)
+{
+    lconj_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        fprintf(stream, "%d: ", pl->id);
+        imprime_estados(pl->estados, stream);
+        pl= pl->prox;
+    }
+
+    fprintf(stream, "\n");
+    return;
+}
+
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
