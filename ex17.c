@@ -680,7 +680,17 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
 
     return;
 }
+void imprime_transicao(ltrans_t *list, FILE *stream)
+{
+    ltrans_t *pl= list;
 
+    while(pl!= NULL)
+    {
+        fprintf(stream, "%d %s %d\n", pl->ei, pl->lei, pl->ef);
+        pl= pl->prox;
+    }
+    return;
+}
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
