@@ -134,3 +134,6 @@ void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info);
 void remove_estado(lest_t **list, lest_t *r);
 void remove_transicao(ltrans_t **list, ltrans_t *r);
 void apaga_estados(lest_t **list);
+void apaga_transicao(ltrans_t **list);
+void remove_conjunto(lconj_t **list, lconj_t *r);
+void apaga_conjunto(lconj_t **list);
