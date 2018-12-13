@@ -1198,6 +1198,11 @@ ltrans_t *busca_por_ef(ltrans_t *list, int est)
 {
     ltrans_t *pl= list;
 
+    while(pl!= NULL)
+    {
+
+    }
+
     return NULL;
 }
 
