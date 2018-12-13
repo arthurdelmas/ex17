@@ -1112,12 +1112,14 @@ void coleta_final(lest_t **list, FILE *stream)
 }
 
 /**
- *@brief
- *@param
- *@param
+ *@brief Coleta as transicoes do arquivo
+ *@param [out] list Armazena as transicoes
+ *@param [in] stream referencia do arquivo
  */
-void coleta_transicao()
+void coleta_transicao(ltrans_t **list, FILE *stream)
 {
+    char ch[SBUFF], *sei, *slei, *sef;
+
 
     return;
 }
