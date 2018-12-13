@@ -1200,7 +1200,9 @@ ltrans_t *busca_por_ef(ltrans_t *list, int est)
 
     while(pl!= NULL)
     {
-
+        if(pl->ef == est)
+            return pl;
+        pl= pl->prox;
     }
 
     return NULL;
