@@ -112,8 +112,8 @@ char *estrela(ltrans_t **list, int ei_ef); /*verificacao do estado*/
 int definir_tamanho(char *ch, char *ch2); /* define o tamanho da memoria*/
 void entrada_Automato(quintupla_t *Q, const char *entrada); /*Coleta arquivo de entrada da quintupla AFND*/
 void coleta_final(lest_t **list, FILE *stream); /*Coleta e armazena os estados finais do arquivo de entrada*/
-void coleta_transicao(ltrans_t **list, FILE *stream) /*Coleta transicoes do arquivo da quintupla AFND*/
-void entrada_ER(char *expReg, char *entrada) /*Ler e armazena a ER*/
+void coleta_transicao(ltrans_t **list, FILE *stream); /*Coleta transicoes do arquivo da quintupla AFND*/
+void entrada_ER(char *expReg, char *entrada); /*Ler e armazena a ER*/
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
-ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no espaco inicial */
-
+ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estado inicial */
+ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
