@@ -99,6 +99,7 @@ int novo_estado(lest_t *list, lconj_t **conj_estados); /*gera um estado para afd
 void modelando_conjunto(lconj_t *simultaneo, lest_t **list);
 ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef);
 ltrans_t *busca_simultaneo(ltrans_t *list, int ref);
+lconj_t *busca_conjunto(lconj_t *list, int id);
 
 
 
