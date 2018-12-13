@@ -1453,6 +1453,29 @@ void insere_estado(lest_t **list, int est)
      return;
 }
 
+void insere_transicao(ltrans_t **list, int ei, char *lei, int ef)
+{
+    ltrans_t *pl= *list, *plant= NULL;
+
+    while(pl!= NULL)
+    {
+        plant= pl;
+        pl= pl->prox;
+    }
+    
+    pl= malloc(sizeof(ltrans_t));
+    pl->ei= ei;
+    pl->lei= (char *) malloc(strlen(lei) * sizeof(char));
+    strcpy(pl->lei, lei);
+    pl->ef= ef;
+    pl->prox= NULL;
+
+   if(!plant)
+       *list= pl;
+   else
+       plant->prox= pl;
+   return;
+}
 
 /**
  * @ingroup GroupUnique
