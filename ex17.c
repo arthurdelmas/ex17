@@ -1003,6 +1003,27 @@ char *estrela(ltrans_t **list, int ei_ef)
     char *chstar;
     ltrans_plstar;
 
+    if((plstar= busca_transicao_lei(*list, ei_ef, ei_ef)) == NULL)
+        return NULL;
+
+    if((tamanho= strlen(plstar->lei)) > 1)
+        tamanho+= 2;
+
+    chstar= malloc((tamanho + 1)*sizeof(char));
+
+    if(strlen(plstar->lei) > 1)
+        strcpy(chstar, "(");
+    else
+        strcpy(chstar, "");
+
+    strcat(chstar, plstar->lei);
+
+    if(strlen(plstar->lei) > 1)
+        strcat(chstar, ")");
+
+    strcat(chstar, "*");
+    remove_transicao(list, plstar);
+
     return chstar;
 }
 
