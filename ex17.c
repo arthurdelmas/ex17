@@ -1214,6 +1214,11 @@ ltrans_t *busca_por_ef(ltrans_t *list, int est)
     return NULL;
 }
 
+/**
+ * @brief Busca uma transicao com o estado inicial e a lei como referencia
+ *
+ */
+
 ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
 {
     ltrans_t *pl= list;
