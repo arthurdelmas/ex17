@@ -1058,11 +1058,13 @@ int definir_tamanho(char *ch, char *ch2)
 
 /**
  *@brief Coleta as entradas do arquivo (quintuola AFND)
- *@param
- *@param
+ *@param [out] Q armazena a quintupla coletada
+ *@param [in] entrada nome do arquivo da quintupla
  */
-void entrada_Automato()
-{
+void entrada_Automato(quintupla_t *Q, const char *entrada)
+{   
+    FILE *pf = fopen(entrada, "r");
+    char ch[SBUFF];
 
     return;
 }
