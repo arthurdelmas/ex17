@@ -1534,6 +1534,35 @@ void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info)
     return;
 }
 
+/**
+ * @brief remove um elemento da lista de estados
+ * @param [out] list lista de estados
+ * @param [in] r elemento a ser eliminado
+ */
+
+void remove_estado(lest_t **list, lest_t *r)
+{
+    lest_t *pl= *list, *plant= NULL;
+
+    while(pl!= NULL)
+    {
+        if(pl == r)
+            break;
+        plant= pl;
+        pl= pl->prox;
+    }
+
+    if(!pl)
+        return;
+
+    if(!plant)
+        *list= pl->prox;
+    else
+        plant->prox= pl->prox;
+
+    free(pl);
+    return;
+}
 
 /**
  * @ingroup GroupUnique
