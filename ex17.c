@@ -1177,6 +1177,12 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 
 ltrans_t *busca_por_ei(ltrans_t *list, int est)
 {
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->ei == est)
+    }
     return NULL;
 }
 
