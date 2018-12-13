@@ -1483,6 +1483,31 @@ void insere_transicao(ltrans_t **list, int ei, char *lei, int ef)
        plant->prox= pl;
    return;
 }
+void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info)
+{
+    t_arvore *pl= *raiz;
+
+    if(!pl)
+    {
+        pl= malloc(sizeof(t_arvore));
+        pl->expReg= malloc(strlen(info) * sizeof(char));
+        strcpy(pl->expReg, info);
+        pl->tipo_op= tipo_operador(pl->expReg[0]);
+        pl->esq= NULL;
+        pl->dir= NULL;
+        pl->pai= ant;
+        *raiz= pl;
+        return;
+    }
+    if(pl->tipo_op == 0 || pl->dir == ant || (pl->tipo_op == 1 && pl->esq == ant))
+    insere_arvore(&pl->pai, pl, info);
+    else if (pl->esq == ant)
+        insere_arvore(&pl->dir, pl, info);
+    else
+        insere_arvore(&pl->esq, pl, info);
+    return;
+}
+
 
 /**
  * @ingroup GroupUnique
