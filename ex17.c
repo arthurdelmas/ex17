@@ -1194,6 +1194,13 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est)
     return NULL;
 }
 
+ltrans_t *busca_por_ef(ltrans_t *list, int est)
+{
+    ltrans_t *pl= list;
+
+    return NULL;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
