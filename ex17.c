@@ -1065,6 +1065,28 @@ void entrada_Automato(quintupla_t *Q, const char *entrada)
 {   
     FILE *pf = fopen(entrada, "r");
     char ch[SBUFF];
+    
+    fgets(ch, SBUFF, pf); /* #K*/
+    fgets(ch, SBUFF, pf); /* #K*/
+    Q->K= atoi(ch);
+
+    fgets(ch, SBUFF, pf); /* #A*/
+    fgets(ch, SBUFF, pf); /* #A*/
+    Q->A= *ch;
+
+    fgets(ch, SBUFF, pf); /* #S*/
+    fgets(ch, SBUFF, pf); /* #S*/
+    Q->S= atoi(ch);
+
+    fgets(ch, SBUFF, pf); /* #F*/
+    Q->F= NULL;
+    coleta_final(&Q->F, pf);
+
+    fgets(ch, SBUFF, pf); /* #D*/
+    Q->D= NULL;
+    coleta_transicao(&Q->D, pf);
+
+    fclose(pf);
 
     return;
 }
