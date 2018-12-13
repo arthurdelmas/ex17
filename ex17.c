@@ -135,7 +135,7 @@
  */
 int main(int argc, char *argv[])
 {
-    int opt; /* return from getopt() */
+    int opt, cont; /* return from getopt() */
 
     IFDEBUG("Starting optarg loop...\n");
 
@@ -143,10 +143,17 @@ int main(int argc, char *argv[])
      *        -h  help
      *        -c  copyrithg and version notes
      *        -v  verbose
-     *        -f  given file name
+     *        -f  transformacao AFD -> ER
+     *        -n  transformacao AFND -> AFD
+     *        -e  transformacao ER -> AFND
+     *        -fe tranformacao AFD -> AFND
+     *        -nf transformcao AFND -> ER
+     *        -en transformacao Er -> AFD
      */
     opterr = 0;
-    while((opt = getopt(argc, argv, "vhcf:")) != EOF)
+    
+    cont= 0;
+    while((opt = getopt(argc, argv, "vhcnfe:")) != EOF)
         switch(opt)
         {
             case 'h':
@@ -161,13 +168,22 @@ int main(int argc, char *argv[])
             case '?':
                 break;
             case 'f':
-                AFD_ER_init(argv[2]);
+                if(!cont)                    
+                    AFD_ER_init(argv[2]);
+                else
+                    AFD_ER_init("saida_AFD.txt");
                 break;
             case 'n':
-                AFND_AFD_init(argv[2]);
+                if(!cont)
+                    AFND_AFD_init(argv[2]);
+                else
+                    AFND_AFD_init("saida_AFND.txt");
                 break;
             case 'e':
-                ER_AFND_init(argv[2]);
+                if(!cont)
+                    ER_AFND_init(argv[2]);
+                else
+                    ER_AFND_init("saida_ER.txt");
                 break;
             default:
                 printf("Type\n\t$man %s\nor\n\t$%s -h\nfor help.\n\n", argv[0], argv[0]);
@@ -209,6 +225,7 @@ void ER_AFND_init(char *entrada)
 
     printf("\n\nExpressao Regular: %s\nQuintupla: \n\n", expReg);
     salva_quintupla(raiz->Q, NULL);
+    salva_quintupla(raiz->Q, "saida_AFND.txt");
   
   return;
 }
@@ -554,7 +571,7 @@ void AFND_AFD_init(const char *entrada)
     estados_novos(Qafnd, &Qafd, simultaneo);
 
     salva_quintupla(Qafd, NULL);
-    salva_quintupla(Qafd, "saida.txt");
+    salva_quintupla(Qafd, "saida_AFD.txt");
 
     return;
 }
@@ -698,17 +715,6 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list)
         plest= plest->prox;
     }
 
-    return;
-}
-void imprime_transicao(ltrans_t *list, FILE *stream)
-{
-    ltrans_t *pl= list;
-
-    while(pl!= NULL)
-    {
-        fprintf(stream, "%d %s %d\n", pl->ei, pl->lei, pl->ef);
-        pl= pl->prox;
-     }
     return;
 }
 
@@ -885,6 +891,7 @@ void AFD_ER_init(const char *arquivo)
 
     int estado;
     quintupla_t Q;
+    FILE *pf= fopen("saida_ER.txt", "w");
 
     entrada_Automato(&Q, arquivo);
 
@@ -899,6 +906,8 @@ void AFD_ER_init(const char *arquivo)
         concatena(&Q.D, estado);
     }
     fprintf(stdout, "Expressao Regular: %s\n", Q.D->lei);
+    fprintf(pf, "%s", Q.D->lei);
+    fclose(pf);
     return;
 }
 
@@ -1105,7 +1114,7 @@ char *estrela(ltrans_t **list, int ei_ef)
 {
     int tamanho= 0;
     char *chstar;
-    ltrans_plstar;
+    ltrans_t *plstar;
 
     if((plstar= busca_transicao_lei(*list, ei_ef, ei_ef)) == NULL)
         return NULL;
@@ -1233,7 +1242,7 @@ void coleta_transicao(ltrans_t **list, FILE *stream)
         slei = strtok(NULL, " ");
         sef = strtok(NULL, " ");
 
-        insere_transicao(list, atoi(sei), slei, atoi(sef)).
+        insere_transicao(list, atoi(sei), slei, atoi(sef));
     }
 
     return;
@@ -1373,10 +1382,34 @@ void imprime_conjunto(lconj_t *list, FILE *stream)
     return;
 }
 
+
+/**
+ *   @brief imprime uma lista de estados
+ *    @param [in] list lista de estados
+ *     @param [in] stream objeto onde será impresso a lista de estados
+ */
+void imprime_estados(lest_t *list, FILE *stream)
+{
+    lest_t *pl= list;
+
+    if(pl!= NULL)
+    {
+        fprintf(stream, "%d", pl->estado);
+        pl= pl->prox;
+    }
+
+    while(pl!= NULL)
+    {
+        fprintf(stream, " %d", pl->estado);
+        pl= pl->prox;
+    }
+    fprintf(stream, "\n");
+    return;
+}
+
 /**
  * @brief imprime os arvores em preordem
  **/
-
 void imprime_arvore(t_arvore *raiz, FILE *stream)
 {
     t_arvore *pl= raiz;
@@ -1386,14 +1419,14 @@ void imprime_arvore(t_arvore *raiz, FILE *stream)
 
     imprime_arvore(pl->esq, stream);
     imprime_arvore(pl->dir, stream);
-    
+
     printf("\n");
     if(pl->tipo_op == 2)
         fprintf(stream, "(%s)%s(%s)\n", pl->esq->expReg, pl->expReg, pl->dir->expReg);
     else if(pl->tipo_op == 1)
-            fprintf(stream, "(%s)%s\n", pl->esq->expReg, pl->expReg);
-         else
-            fprintf(stream, "%s\n", pl->expReg);
+        fprintf(stream, "(%s)%s\n", pl->esq->expReg, pl->expReg);
+    else
+        fprintf(stream, "%s\n", pl->expReg);
 
     salva_quintupla(pl->Q, NULL);
     getchar();
