@@ -860,6 +860,14 @@ void uniao(ltrans_t **list)
             else
                 strcpy(res.lei, "E");
         }
+        
+        remove_transicao(list, pl);
+        remove_transicao(list, pl2);
+        insere_transicao(list, res.ei, res.lei, res.ef);
+        free(res.lei);
+    }
+    return;
+}
 
 /**
  * @ingroup GroupUnique
