@@ -1182,6 +1182,8 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est)
     while(pl!= NULL)
     {
         if(pl->ei == est)
+            return pl;
+        pl= pl->prox;
     }
     return NULL;
 }
