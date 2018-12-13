@@ -1,7 +1,7 @@
 /***************************************************************************
- *   exN.c                                 Version 20160609.110111       *
+ *   ex17.c                                 Version 20160609.110111        *
  *                                                                         *
- *   Convert ER into AFD                                                   *
+ *   Convert ER into AFND into AFD into ER                                 *
  *   Copyright (C) 2016         by Ruben Carlo Benante                     *
  ***************************************************************************
  *   This program is free software; you can redistribute it and/or modify  *
@@ -26,7 +26,7 @@
  ***************************************************************************/
 /* ---------------------------------------------------------------------- */
 /**
- * @file exN.c
+ * @file ex17.c
  * @ingroup GroupUnique
  * @brief diga algo curto (titulo)
  * @details diga algo detalhado 
@@ -72,7 +72,7 @@
 #include <stdlib.h> /* Miscellaneous functions (rand, malloc, srand)*/
 #include <getopt.h> /* get options from system argc/argv */
 #include <string.h> /* Strings functions definitions */
-#include "exN.h" /* library with definitions */
+#include "ex17.h" /* library with definitions */
 
 /* #include <time.h> */ /* Time and date functions */
 /* #include <math.h> */ /* Mathematics functions */
@@ -161,21 +161,26 @@ int main(int argc, char *argv[])
             case '?':
                 break;
             case 'f':
-                strcpy(sfile, optarg);
+                AFD_ER_init(argv[2]);
+                break;
+            case 'n':
+                AFND_AFD_init(argv[2]);
+                break;
+            case 'e':
+                ER_AFND_init(argv[2]);
                 break;
             default:
                 printf("Type\n\t$man %s\nor\n\t$%s -h\nfor help.\n\n", argv[0], argv[0]);
                 return EXIT_FAILURE;
         }
-
     if(verb)
+        
         printf("Verbose level set at: %d\n", verb);
     /* ...and we are done */
-
-//    exN_init(); /* global initialization function: ainda a saber para que usar se precisar */
-
+    
     return EXIT_SUCCESS;
 }
+
 /* ---------------------------------------------------------------------- */
 /**
  * @ingroup GroupUnique
@@ -188,12 +193,27 @@ int main(int argc, char *argv[])
  * @date 2016-06-09
  *   
  */
-void exN_init(void)
+
+void ER_AFND_init(char *entrada)
 {
-    IFDEBUG("exN_init()");
-     /* initialization */
-     return;
+    char expReg[SBUFF];
+    t_arvore *raiz= NULL;
+
+    IFDEBUG("ex16_init()");
+    /* initialization */
+
+    entrada_ER(expReg, entrada);
+    quebraExpressao(expReg, &raiz);
+
+    transformacao(raiz);
+
+    printf("\n\nExpressao Regular: %s\nQuintupla: \n\n", expReg);
+    salva_quintupla(raiz->Q, NULL);
+  
+  return;
 }
+
+
 
 /**
  * @brief identifica o tipo da informacao: nao operador, operador unario ou operador binario
