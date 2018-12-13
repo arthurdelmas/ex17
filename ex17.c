@@ -1136,6 +1136,17 @@ void coleta_transicao(ltrans_t **list, FILE *stream)
 }
 
 /**
+ *@brief Ler e armazerna a ER(expressao regular)
+ *@param [out] expReg armazena a expressao regular
+ *@param [in] entrada nome do arquivo lido
+ */
+void entrada_ER(char *expReg, char *entrada)
+{
+    
+    return;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
