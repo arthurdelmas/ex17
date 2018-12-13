@@ -1177,6 +1177,8 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 
 /**
  * @brief Busca uma transicao usando apenas o estado inicial como referencia de busca
+ * @param [in] list lista das transicoes
+ * @param [in] est estado inicial (referencia)
  */
 ltrans_t *busca_por_ei(ltrans_t *list, int est)
 {
