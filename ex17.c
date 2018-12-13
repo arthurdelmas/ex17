@@ -1033,7 +1033,6 @@ char *estrela(ltrans_t **list, int ei_ef)
  * @param [in] ch2 lei 2
  * @return o tamanho de bytes necessarios
  */
-
 int definir_tamanho(char *ch, char *ch2)
 {
     int tamanho= 0;
@@ -1053,7 +1052,22 @@ int definir_tamanho(char *ch, char *ch2)
     }
 
     return tamanho > 0 ? tamanho : 2;
-}    
+}
+
+/*-----Entrada-----*/
+
+/**
+ *@brief Coleta as entradas do arquivo (quintuola AFND)
+ *@param
+ *@param
+ */
+void entrada_Automato()
+{
+
+    return;
+}
+
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
