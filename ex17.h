@@ -100,4 +100,10 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list);
 int igualdade_conjunto(lest_t *list, lest_t *list2);
 void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Copia estados para um conjunto de estados*/
 void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Manda o primeiro estado para o conjunto simultaneo*/
+void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list);
+
+
+
+
+
 
