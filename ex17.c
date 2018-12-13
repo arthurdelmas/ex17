@@ -899,6 +899,12 @@ int estado_eliminar(quintupla_t Q)
     }
     return menor;
 }
+/**
+ * @brief faz a concatenacao de duas leis dado o estado que sera eliminado nessa juncao, Se apropria da funcao concatena_aux para atribuir as leis em uma unica string
+ * @param [in] list lista de transicoes
+ * @param [in] est estado a ser eliminado, referencia para de concatencao
+ **/
+
 void concatena(ltrans_t **list, int est)
 {
     ltrans_t *pl= *list, *pl2, *plr, *pl2r, res;
