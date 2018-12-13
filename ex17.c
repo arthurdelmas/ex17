@@ -766,6 +766,561 @@ void salva_quintupla(quintupla_t Q, char *arquivo)
 }
 
 /**
+ * @brief verificar se dois conjuntos sao iguais
+ * @param [in] list conjunto de estados
+ * @param [in] list2 conjunto de estados
+ * @return verdadeiro ou falso
+ */
+int igualdade_conjunto(lest_t *list, lest_t *list2)
+{
+    lest_t *pl= list, *pl2= list2;
+
+    while(1)
+    {
+        if(!pl)
+        {
+            if(!pl2)
+                break;
+            else
+                return 0;
+        }
+        else
+        {
+            if(!pl2)
+                return 0;
+        }
+
+        if(pl->estado != pl2->estado)
+            return 0;
+        pl= pl->prox;
+        pl2= pl2->prox;
+    }
+
+    return 1;
+}
+
+
+/**
+ *@brief copia o estado para o conjunto de estados simultaneos
+ *@param [in] estados lista de estados
+ *@param [out] simultaneo lista de estados simultaneos
+ */ 
+void copia_estado(lest_t **estados, lconj_t *simultaneo, int s)
+{
+    lconj_t *plconj = busca_conjunto(simultaneo, s);
+    lest_t *plest = plconj->estados;
+    
+    while(plest != NULL)
+    {
+        insere_estado(estados, plest->estado);
+        plest = plest->prox;
+    }
+
+    return;
+}
+
+/** 
+ *@brief chama a funcao que copia estado e manda o primeiro estado para a lista de estados simultaneos
+ *@param [in] estados lista de estados
+ *@param [out] simultaneo lista de estados simultaneos
+ */ 
+void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
+{
+    copia_estado(estados, simultaneo, s);
+    return;
+}
+
+void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list)
+{
+    lconj_t *plconj= conjunto;
+    lest_t *plest, *plfinal= final;
+    
+    while(plconj!= NULL)
+    {
+        plest= plconj->estados;
+        while(plest!= NULL)
+        {
+            plfinal= final;
+            while(plfinal!= NULL)
+            {
+                if(plest->estado == plfinal->estado)
+                    insere_estado(list, plconj->id);
+                plfinal= plfinal->prox;
+            }
+            plest= plest->prox;
+        }
+        plconj= plconj->prox;
+    }     
+
+    return;
+}
+
+/**
+ * @brief  inicia a conversão de AFD para ER.
+ */
+
+void AFD_ER_init(const char *arquivo)
+{
+    IFDEBUG("ex12_init()");
+
+    int estado;
+    quintupla_t Q;
+
+    entrada_Automato(&Q, arquivo);
+
+    estados_limite(&Q);
+
+    while(!lista_unitaria(Q.D))
+    {
+        uniao(&Q.D);
+
+        estado= estado_eliminar(Q);
+
+        concatena(&Q.D, estado);
+    }
+    fprintf(stdout, "Expressao Regular: %s\n", Q.D->lei);
+    return;
+}
+
+/**
+ * @brief limita a quintupla para apenas uma unica entrada e uma unica saida da AFD
+ * @param [in, out] Q quintupla AFD
+ */
+
+void estados_limite(quintupla_t *Q)
+{
+    lest_t *pl= Q->F;
+    insere_transicao(&Q->D, Q->K, "E", Q->S);
+
+    while(pl!= NULL)
+    {
+        insere_transicao(&Q->D, pl->estado, "E", Q->K+1);
+        pl= pl->prox;
+    }
+    return;
+}
+
+/**
+ * @brief verifica se a lista das transicoes possui apenas um elemento
+ * @param [in] list lista de transicoes
+ * @return verdadeiro ou falso caso a lista seja unitaria
+ */
+
+int lista_unitaria(ltrans_t *list)
+{
+    if(!list)
+        return 0;
+    return list->prox == NULL ? 1 : 0;
+}
+/**
+ * @brief procura por transicoes semelhantes do tipo transicao 1 e 2 (ei1 == ei2, lei1 != ou == lei2, ef1 == ef2), e faz a uniao das leis separando as pelo operador |
+ * @param [in, out] list lista das transicoes
+ */
+
+void uniao(ltrans_t **list)
+{
+    ltrans_t *pl, *pl2, res/* variavel que vai unificar as transicoes semelhantes*/;
+
+    while(busca_semelhantes(*list, &pl, &pl2)) /* procurando por transicoes semelhantes, retorna 0 se nada for encontrado, e 1 se encontrado*/
+    {
+        res.ei= pl->ei;
+        res.ef= pl->ef;
+        res.lei= malloc(definir_tamanho(pl->lei, pl2->lei) * sizeof(char)); /* definindo o tamanho da string que vai unir as leis*/
+
+        /* processo de atribuicao da uniao das leis em um string*/
+        if(strcmp(pl->lei, "E") != 0)
+        {
+            strcpy(res.lei, pl->lei);
+            if(strcmp(pl2->lei, "E") != 0)
+            {
+                strcat(res.lei, "|");
+                strcat(res.lei, pl2->lei);
+            }
+        }
+        else
+        {
+            if(strcmp(pl2->lei, "E") != 0)
+                strcpy(res.lei, pl2->lei);
+            else
+                strcpy(res.lei, "E");
+        }
+        
+        remove_transicao(list, pl);
+        remove_transicao(list, pl2);
+        insere_transicao(list, res.ei, res.lei, res.ef);
+        free(res.lei);
+    }
+    return;
+}
+/**
+ * @brief Procura pelo estado com menos interacoes, e ignora os estado limites
+ * @param [in] Q quintupla
+ * @return estado
+ *     */
+int estado_eliminar(quintupla_t Q)
+{
+    int vetor[Q.K], i, menor /* indice do vetor com menor valor*/;
+    ltrans_t *pl= Q.D;
+
+    for(i=0; i<Q.K; i++) vetor[i]= 0;
+
+    while(pl!= NULL)
+    {
+        if(pl->ei < Q.K)
+            vetor[pl->ei]+= 1;
+        if(pl->ef < Q.K)
+            vetor[pl->ef]+= 1;
+
+     pl= pl->prox;
+    }
+    menor= 0; /* indice do vetor inicial*/
+    for(i=1; i<Q.K; i++)
+    {
+        if(vetor[menor] == 0)
+            menor = i;
+        else if(vetor[menor] > vetor[i] && vetor[i] != 0)
+            menor= i;
+    }
+    return menor;
+}
+/**
+ * @brief faz a concatenacao de duas leis dado o estado que sera eliminado nessa juncao, Se apropria da funcao concatena_aux para atribuir as leis em uma unica string
+ * @param [in] list lista de transicoes
+ * @param [in] est estado a ser eliminado, referencia para de concatencao
+ **/
+
+void concatena(ltrans_t **list, int est)
+{
+    ltrans_t *pl= *list, *pl2, *plr, *pl2r, res;
+    char *chstar, *aux;
+
+    chstar= estrela(list, est); /* verifica se o estado selecionado possui a estrela*/
+
+    while((pl= busca_por_ef(pl, est)) != NULL) /* procurando por transicoes que terminam com o estado de referencia (est)*/
+    {
+        pl2= *list;
+        while((pl2= busca_por_ei(pl2, est))!= NULL) /* procurando por transicoes que inicia com o 'est'*/
+        {
+            /* Processo de concatenacao*/
+            res.ei= pl->ei;
+
+            if(chstar!= NULL)
+            {
+                concatena_aux(&aux, pl->lei, chstar);
+                concatena_aux(&res.lei, aux, pl2->lei);
+            }
+            else
+                concatena_aux(&res.lei, pl->lei, pl2->lei);
+            res.ef= pl2->ef;
+
+            insere_transicao(list, res.ei, res.lei, res.ef);
+           /* ---------------------------------- */
+
+           pl2r= pl2;
+           pl2= pl2->prox;
+           remove_transicao(list, pl2r);
+        }
+        plr= pl;
+        pl= pl->prox;
+        remove_transicao(list, plr);
+    }
+    return;
+}
+
+/**
+ * @brief Funcao que contatena (atribui) duas leis numa string
+ * @param [out] lei concatenada
+ * @param [in] ch lei 1
+ * @param [in] ch2 lei 2
+ **/
+
+void concatena_aux(char **dest, char *ch, char *ch2)
+{
+    *dest= malloc(definir_tamanho(ch, ch2) * sizeof(char));
+
+     if(strcmp(ch, "E") != 0)
+     {
+         if(strlen(ch)> 1 && strcmp(ch2, "E") != 0)
+         {
+             strcpy(*dest, "(");
+             strcat(*dest, ch);
+             strcat(*dest, ")");
+         }
+         else
+             strcpy(*dest, ch);
+     }
+
+     if(strcmp(ch2, "E") != 0)
+     {
+         if(strcmp(ch, "E") != 0)
+         {
+             strcat(*dest, ".");
+             if(strlen(ch2)> 1)
+             {
+                 strcat(*dest, "(");
+                 strcat(*dest, ch2);
+                 strcat(*dest, ")");
+             }
+             else                                                                    
+                 strcat(*dest, ch2);
+         }
+         else
+             strcpy(*dest, ch2);
+     }
+
+      if(strcmp(ch, "E") == 0 && strcmp(ch2, "E") == 0)
+          strcpy(*dest, "E");
+
+      return;
+}
+
+/** 
+ * @brief verifica se o estado dado possui a estrela, se caso sim, retorna a lei, se nao retorna NULL
+ * @param [in] list lista de transicoes
+ * @param [in] ei_ef estado de referencia
+ * @return lei com estrela(*), ou NULL
+ */
+
+char *estrela(ltrans_t **list, int ei_ef)
+{
+    int tamanho= 0;
+    char *chstar;
+    ltrans_plstar;
+
+    if((plstar= busca_transicao_lei(*list, ei_ef, ei_ef)) == NULL)
+        return NULL;
+
+    if((tamanho= strlen(plstar->lei)) > 1)
+        tamanho+= 2;
+
+    chstar= malloc((tamanho + 1)*sizeof(char));
+
+    if(strlen(plstar->lei) > 1)
+        strcpy(chstar, "(");
+    else
+        strcpy(chstar, "");
+
+    strcat(chstar, plstar->lei);
+
+    if(strlen(plstar->lei) > 1)
+        strcat(chstar, ")");
+
+    strcat(chstar, "*");
+    remove_transicao(list, plstar);
+
+    return chstar;
+}
+
+/**
+ * @brief define o tamanho de memoria que sera usada para armazena duas leis
+ * @param [in] ch lei 1
+ * @param [in] ch2 lei 2
+ * @return o tamanho de bytes necessarios
+ */
+int definir_tamanho(char *ch, char *ch2)
+{
+    int tamanho= 0;
+
+    if(strcmp(ch, "E")!= 0)
+    {
+        tamanho+= strlen(ch) +1; /*para o ponto ou \0 */
+        if(strlen(ch)>1)
+            tamanho+= 2; /*2 para os parenteses*/
+    }
+
+    if(strcmp(ch2, "E")!= 0)
+    {
+        tamanho+= strlen(ch) + 1; /* para o \0*/
+        if(strlen(ch) > 1)
+            tamanho+= 2; /*2 para os parenteses*/
+    }
+
+    return tamanho > 0 ? tamanho : 2;
+}
+
+/*-----Entrada-----*/
+
+/**
+ *@brief Coleta as entradas do arquivo (quintuola AFND)
+ *@param [out] Q armazena a quintupla coletada
+ *@param [in] entrada nome do arquivo da quintupla
+ */
+void entrada_Automato(quintupla_t *Q, const char *entrada)
+{   
+    FILE *pf = fopen(entrada, "r");
+    char ch[SBUFF];
+    
+    fgets(ch, SBUFF, pf); /* #K*/
+    fgets(ch, SBUFF, pf); /* #K*/
+    Q->K= atoi(ch);
+
+    fgets(ch, SBUFF, pf); /* #A*/
+    fgets(ch, SBUFF, pf); /* #A*/
+    Q->A= *ch;
+
+    fgets(ch, SBUFF, pf); /* #S*/
+    fgets(ch, SBUFF, pf); /* #S*/
+    Q->S= atoi(ch);
+
+    fgets(ch, SBUFF, pf); /* #F*/
+    Q->F= NULL;
+    coleta_final(&Q->F, pf);
+
+    fgets(ch, SBUFF, pf); /* #D*/
+    Q->D= NULL;
+    coleta_transicao(&Q->D, pf);
+
+    fclose(pf);
+
+    return;
+}
+
+/**
+ *@brief Armazena estados finais do arquivo coletado
+ *@param [out] list armazena o estado final
+ *@param [in] stream referencia do arquivo de entrada
+ */
+void coleta_final(lest_t **list, FILE *stream)
+{
+    char ch[SBUFF], *sch;
+
+    fgets(ch, SBUFF, stream);
+    sch = strtok(ch, " ");
+
+    do
+    {
+        insere_estado(list, atoi(sch));
+    }while((sch = strtok(NULL, " ")) != NULL);
+    
+    return;
+}
+
+/**
+ *@brief Coleta as transicoes do arquivo
+ *@param [out] list Armazena as transicoes
+ *@param [in] stream referencia do arquivo
+ */
+void coleta_transicao(ltrans_t **list, FILE *stream)
+{
+    char ch[SBUFF], *sei, *slei, *sef;
+
+    while(fgets(ch, SBUFF, stream)!= NULL)
+    {
+        if(strcmp(ch, "\n")==0)
+            return;
+        
+        sei = strtok(ch, " ");
+        slei = strtok(NULL, " ");
+        sef = strtok(NULL, " ");
+
+        insere_transicao(list, atoi(sei), slei, atoi(sef)).
+    }
+
+    return;
+}
+
+/**
+ *@brief Ler e armazerna a ER(expressao regular)
+ *@param [out] expReg armazena a expressao regular
+ *@param [in] entrada nome do arquivo lido
+ */
+void entrada_ER(char *expReg, char *entrada)
+{
+    FILE *pf = fopen (entrada, "r");
+
+    fgets(expReg, SBUFF, pf);
+
+    return;
+}
+
+/* ----------------- Funcoes de Busca ------------------------ */
+
+/**
+ * @brief busca por transicoes onde o estado inicial de uma transicao eh igual a de outra, como tambem com os estados finais ei1 == ei2 && ef1 == ef2
+ * @param [in] list lista das transicoes
+ * @param [out] pl transicao semelhante a pl2
+ * @param [out] pl2 transicao semelhante a pl
+ * @return verdadeiro caso haja transicoes semelhantes, e falso para nao ha
+ */
+int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
+{
+    ltrans_t *plist= list, *plbusca;
+    
+    while(plist!= NULL)
+    {
+        if((plbusca= busca_transicao_lei(plist->prox, plist->ei, plist->ef)) != NULL)
+        {
+            *pl= plist;
+            *pl2= plbusca;
+            return 1;
+        }
+        plist= plist->prox;
+    }
+    return 0;
+}
+
+/**
+ * @brief Busca uma transicao usando apenas o estado inicial como referencia de busca
+ * @param [in] list lista das transicoes
+ * @param [in] est estado inicial (referencia)
+ * @return transicao com o estado inicial est
+ */
+ltrans_t *busca_por_ei(ltrans_t *list, int est)
+{
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->ei == est)
+            return pl;
+        pl= pl->prox;
+    }
+    return NULL;
+}
+
+/**
+ * @brief Busca uma transicao usando apenas o estado final como referencia de busca
+ * @param [in] list lista das transicoes
+ * @param [in] est estado final (referencia)
+ * @return transicao com o estado final est 
+ */
+ltrans_t *busca_por_ef(ltrans_t *list, int est)
+{
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->ef == est)
+            return pl;
+        pl= pl->prox;
+    }
+
+    return NULL;
+}
+
+/**
+ * @brief Busca uma transicao com o estado inicial e a lei como referencia
+ * @param [in] list lista das transicoes
+ * @param [in] ei estado inicial (referencia)
+ * @param [in] lei lei
+ * @return uma transicao
+ */
+
+ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
+{
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->ei == ei && strcmp(pl->lei, lei)== 0)
+            return pl;
+        pl= pl->prox;
+    }
+
+    return NULL;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)

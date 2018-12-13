@@ -101,7 +101,26 @@ ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef);
 ltrans_t *busca_simultaneo(ltrans_t *list, int ref);
 lconj_t *busca_conjunto(lconj_t *list, int id);
 void salva_quintupla(quintupla_t Q, char *arquivo);
-
-
-
+int igualdade_conjunto(lest_t *list, lest_t *list2);
+void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Copia estados para um conjunto de estados*/
+void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Manda o primeiro estado para o conjunto simultaneo*/
+void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list);
+void AFD_ER_init(const char *arquivo);
+void estados_limite(quintupla_t *Q);
+int lista_unitaria(ltrans_t *list);
+void uniao(ltrans_t **list);
+void concatena(ltrans_t **list, int est);
+int estado_eliminar(quintupla_t Q);
+void concatena_aux(char **dest, char *ch, char *ch2);
+char *estrela(ltrans_t **list, int ei_ef); /*verificacao do estado*/
+int definir_tamanho(char *ch, char *ch2); /* define o tamanho da memoria*/
+void entrada_Automato(quintupla_t *Q, const char *entrada); /*Coleta arquivo de entrada da quintupla AFND*/
+void coleta_final(lest_t **list, FILE *stream); /*Coleta e armazena os estados finais do arquivo de entrada*/
+void coleta_transicao(ltrans_t **list, FILE *stream); /*Coleta transicoes do arquivo da quintupla AFND*/
+void entrada_ER(char *expReg, char *entrada); /*Ler e armazena a ER*/
+int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
+ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estado inicial */
+ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
+ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei); /* busca uma transicao com o estado inicial e a lei como referencia */
+ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma transicao tendo um estado final e inicial como refenrencia */
 
