@@ -117,3 +117,4 @@ void entrada_ER(char *expReg, char *entrada); /*Ler e armazena a ER*/
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
 ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estado inicial */
 ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
+ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei) /* busca uma transicao com o estado inicial e a lei como referencia */
