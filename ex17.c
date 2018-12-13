@@ -868,6 +868,11 @@ void uniao(ltrans_t **list)
     }
     return;
 }
+/**
+ * @brief Procura pelo estado com menos interacoes, e ignora os estado limites
+ * @param [in] Q quintupla
+ * @return estado
+ *     */
 int estado_eliminar(quintupla_t Q)
 {
     int vetor[Q.K], i, menor /* indice do vetor com menor valor*/;
