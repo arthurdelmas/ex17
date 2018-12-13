@@ -1153,7 +1153,9 @@ void entrada_ER(char *expReg, char *entrada)
 
 /**
  * @brief busca por transicoes onde o estado inicial de uma transicao eh igual a de outra, como tambem com os estados finais ei1 == ei2 && ef1 == ef2
- *
+ * @param [in] list lista das transicoes
+ * @param [out] pl transicao semelhante a pl2
+ * @param [out] pl2 transicao semelhante a pl
  */
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 {
