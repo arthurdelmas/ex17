@@ -126,6 +126,8 @@ ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma trans
 void imprime_transicao(ltrans_t *list, FILE *stream);
 void imprime_conjunto(lconj_t *list, FILE *stream);
 void imprime_arvore(t_arvore *raiz, FILE *stream);
-
+void insere_conjunto(lconj_t **list, int id);
+void insere_conjunto(lconj_t **list, int id);
+void insere_estado(lest_t **list, int est);
 
 
