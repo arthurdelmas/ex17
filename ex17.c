@@ -1220,7 +1220,9 @@ ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
 
     while(pl!= NULL)
     {
-   
+        if(pl->ei == ei && strcmp(pl->lei, lei)== 0)
+            return pl;
+        pl= pl->prox;
     }
 
     return NULL;
