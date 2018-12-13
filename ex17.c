@@ -990,6 +990,22 @@ void concatena_aux(char **dest, char *ch, char *ch2)
       return;
 }
 
+/** 
+ * @brief verifica se o estado dado possui a estrela, se caso sim, retorna a lei, se nao retorna NULL
+ * @param [in] list lista de transicoes
+ * @param [in] ei_ef estado de referencia
+ * @return lei com estrela(*), ou NULL
+ */
+
+char *estrela(ltrans_t **list, int ei_ef)
+{
+    int tamanho= 0;
+    char *chstar;
+    ltrans_plstar;
+
+    return chstar;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
