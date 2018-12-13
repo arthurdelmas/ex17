@@ -1111,6 +1111,16 @@ void coleta_final(lest_t **list, FILE *stream)
     return;
 }
 
+/**
+ *@brief
+ *@param
+ *@param
+ */
+void coleta_transicao()
+{
+
+    return;
+}
 
 /**
  * @ingroup GroupUnique
