@@ -1381,6 +1381,42 @@ void imprime_arvore(t_arvore *raiz, FILE *stream)
 
     return;
 }
+/* ----------------------------- insere ----------------------- */
+
+void insere_conjunto(lconj_t **list, int id)
+{
+    lconj_t *pl= *list, *plant= NULL;
+
+    while(pl!= NULL)
+    {
+        plant= pl;
+        pl= pl->prox;
+    }
+    pl= malloc(sizeof(lconj_t));
+    pl->id= id;
+    pl->estados= NULL;
+    pl->prox= NULL;
+
+    if(!plant)
+        *list= pl;
+    else
+        plant->prox= pl;
+    return;
+}
+void insere_conjuntoFULL(lconj_t **conjunto, lest_t *list, int id)
+{
+    lconj_t *pltrans;
+    insere_conjunto(conjunto, id);
+    pltrans= busca_conjunto(*conjunto, id);
+
+    while(list!= NULL)
+    {
+        insere_estado(&pltrans->estados, list->estado);
+        list= list->prox;
+    }
+    return;
+}
+
 
 /**
  * @ingroup GroupUnique
