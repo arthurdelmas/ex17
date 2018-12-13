@@ -1353,6 +1353,30 @@ void imprime_conjunto(lconj_t *list, FILE *stream)
     return;
 }
 
+void imprime_arvore(t_arvore *raiz, FILE *stream)
+{
+    t_arvore *pl= raiz;
+
+    if(!pl)
+        return;
+
+    imprime_arvore(pl->esq, stream);
+    imprime_arvore(pl->dir, stream);
+    
+    printf("\n");
+    if(pl->tipo_op == 2)
+        fprintf(stream, "(%s)%s(%s)\n", pl->esq->expReg, pl->expReg, pl->dir->expReg);
+    else if(pl->tipo_op == 1)
+            fprintf(stream, "(%s)%s\n", pl->esq->expReg, pl->expReg);
+         else
+            fprintf(stream, "%s\n", pl->expReg);
+
+    salva_quintupla(pl->Q, NULL);
+    getchar();
+    printf("\n");
+
+    return;
+}
 
 /**
  * @ingroup GroupUnique
