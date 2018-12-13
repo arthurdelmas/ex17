@@ -114,4 +114,4 @@ void entrada_Automato(quintupla_t *Q, const char *entrada); /*Coleta arquivo de 
 void coleta_final(lest_t **list, FILE *stream); /*Coleta e armazena os estados finais do arquivo de entrada*/
 void coleta_transicao(ltrans_t **list, FILE *stream) /*Coleta transicoes do arquivo da quintupla AFND*/
 void entrada_ER(char *expReg, char *entrada) /*Ler e armazena a ER*/
-
+int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
