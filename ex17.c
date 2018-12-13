@@ -688,9 +688,51 @@ void imprime_transicao(ltrans_t *list, FILE *stream)
     {
         fprintf(stream, "%d %s %d\n", pl->ei, pl->lei, pl->ef);
         pl= pl->prox;
-    }
+     }
     return;
 }
+
+/**
+ * @brief Busca uma transicao com o estado inicial e o estado final como referencia
+ * @param [in] list lista das transicoes
+ * @param [in] ei estado inicial (referencia)
+ * @param [in] ef estado final (referencia)
+ * @return uma transicao
+ **/
+
+ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef)
+{
+    ltrans_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->ei== ei && pl->ef == ef)
+        return pl;
+        pl= pl->prox;
+    }
+
+    return NULL;
+}
+
+ltrans_t *busca_simultaneo(ltrans_t *list, int ref)
+{
+    return busca_transicao(list, ref, "E");
+}
+
+lconj_t *busca_conjunto(lconj_t *list, int id)
+{
+    lconj_t *pl= list;
+
+    while(pl!= NULL)
+    {
+        if(pl->id == id)
+        return pl;
+        pl= pl->prox;
+    }
+
+    return NULL;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
