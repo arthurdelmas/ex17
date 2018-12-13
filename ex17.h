@@ -107,5 +107,5 @@ int lista_unitaria(ltrans_t *list);
 void uniao(ltrans_t **list);
 void concatena(ltrans_t **list, int est);
 int estado_eliminar(quintupla_t Q);
-
+void concatena_aux(char **dest, char *ch, char *ch2);
 
