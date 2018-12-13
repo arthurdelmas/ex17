@@ -750,6 +750,23 @@ void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list)
 {
     lconj_t *plconj= conjunto;
     lest_t *plest, *plfinal= final;
+    
+    while(plconj!= NULL)
+    {
+        plest= plconj->estados;
+        while(plest!= NULL)
+        {
+            plfinal= final;
+            while(plfinal!= NULL)
+            {
+                if(plest->estado == plfinal->estado)
+                    insere_estado(list, plconj->id);
+                plfinal= plfinal->prox;
+            }
+            plest= plest->prox;
+        }
+        plconj= plconj->prox;
+    }     
 
     return;
 }
