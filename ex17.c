@@ -1595,6 +1595,23 @@ void remove_transicao(ltrans_t **list, ltrans_t *r)
 }
 
 /**
+ * @brief apaga toda um lista de estados
+ * @param [in,out] list lista de estados
+ */
+
+void apaga_estados(lest_t **list)
+{
+    lest_t *pl= *list;
+
+    while(pl!= NULL)
+    {
+        remove_estado(list, pl);
+        pl= *list;
+    }
+    return;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
