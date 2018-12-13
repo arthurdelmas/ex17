@@ -1452,6 +1452,13 @@ void insere_estado(lest_t **list, int est)
      }
      return;
 }
+/**
+ * @brief cria uma lista e atribui novos elementos a lista de transicoes
+ * @param [out] list lista de transicoes
+ * @param [in] ei estado(valor) a ser atribuido na lista, parte da transicao
+ * @param [in] lei expressao que compoe a transicao a ser atribuida na lista
+ * @param [in] ef estado(valor) a ser atribuido na lista, parte da transicao
+ **/
 
 void insere_transicao(ltrans_t **list, int ei, char *lei, int ef)
 {
