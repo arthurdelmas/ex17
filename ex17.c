@@ -828,6 +828,22 @@ int lista_unitaria(ltrans_t *list)
         return 0;
     return list->prox == NULL ? 1 : 0;
 }
+/**
+ * @brief procura por transicoes semelhantes do tipo transicao 1 e 2 (ei1 == ei2, lei1 != ou == lei2, ef1 == ef2), e faz a uniao das leis separando as pelo operador |
+ * @param [in, out] list lista das transicoes
+ */
+
+void uniao(ltrans_t **list)
+{
+    ltrans_t *pl, *pl2, res/* variavel que vai unificar as transicoes semelhantes*/;
+
+    while(busca_semelhantes(*list, &pl, &pl2)) /* procurando por transicoes semelhantes, retorna 0 se nada for encontrado, e 1 se encontrado*/
+    {
+        res.ei= pl->ei;
+        res.ef= pl->ef;
+        res.lei= malloc(definir_tamanho(pl->lei, pl2->lei) * sizeof(char)); /* definindo o tamanho da string que vai unir as leis*/
+
+
 
 /**
  * @ingroup GroupUnique
