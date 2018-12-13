@@ -1142,7 +1142,10 @@ void coleta_transicao(ltrans_t **list, FILE *stream)
  */
 void entrada_ER(char *expReg, char *entrada)
 {
-    
+    FILE *pf = fopen (entrada, "r");
+
+    fgets(expReg, SBUFF, pf);
+
     return;
 }
 
