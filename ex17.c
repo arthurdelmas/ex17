@@ -1091,6 +1091,17 @@ void entrada_Automato(quintupla_t *Q, const char *entrada)
     return;
 }
 
+/**
+ *@brief Armazena estados finais do arquivo coletado
+ *@param [out] list armazena o estado final
+ *@param [in] stream referencia do arquivo de entrada
+ */
+void coleta_final(lest_t **list, FILE *stream)
+{
+
+    return;
+}
+
 
 /**
  * @ingroup GroupUnique
