@@ -125,6 +125,7 @@ ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei); /* busca uma trans
 ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma transicao tendo um estado final e inicial como refenrencia */
 void imprime_transicao(ltrans_t *list, FILE *stream);
 void imprime_conjunto(lconj_t *list, FILE *stream);
+void imprime_arvore(t_arvore *raiz, FILE *stream);
 
 
 
