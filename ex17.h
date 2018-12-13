@@ -100,7 +100,7 @@ void modelando_conjunto(lconj_t *simultaneo, lest_t **list);
 ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef);
 ltrans_t *busca_simultaneo(ltrans_t *list, int ref);
 lconj_t *busca_conjunto(lconj_t *list, int id);
-
+void salva_quintupla(quintupla_t Q, char *arquivo);
 
 
 
