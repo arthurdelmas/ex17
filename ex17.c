@@ -1483,6 +1483,12 @@ void insere_transicao(ltrans_t **list, int ei, char *lei, int ef)
        plant->prox= pl;
    return;
 }
+/**
+ * @brief salva e organiza informacoes no formato de arvore binaria, insere em preordem
+ * @param [out] raiz objeto arvore
+ * @param ant auxiliar, serve como orientador, registra a ultima posicao percorrida na arvore, uso interno exclusivo inicie com o objeto da arvore
+ **/
+
 void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info)
 {
     t_arvore *pl= *raiz;
