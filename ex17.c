@@ -1194,6 +1194,10 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est)
     return NULL;
 }
 
+/**
+ * @brief Busca uma transicao usando apenas o estado final como referencia de busca
+ */
+
 ltrans_t *busca_por_ef(ltrans_t *list, int est)
 {
     ltrans_t *pl= list;
