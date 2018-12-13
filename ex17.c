@@ -1218,6 +1218,11 @@ ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
 {
     ltrans_t *pl= list;
 
+    while(pl!= NULL)
+    {
+   
+    }
+
     return NULL;
 }
 
