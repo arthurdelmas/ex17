@@ -1149,6 +1149,8 @@ void entrada_ER(char *expReg, char *entrada)
     return;
 }
 
+/* ----------------- Funcoes de Busca ------------------------ */
+
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 {
     ltrans_t *plist= list, *plbusca;
@@ -1161,6 +1163,7 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
             *pl2= plbusca;
             return 1;
         }
+        plist= plist->prox;
     }
     return 0;
 }
