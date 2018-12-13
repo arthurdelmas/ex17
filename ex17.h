@@ -123,4 +123,8 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estad
 ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
 ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei); /* busca uma transicao com o estado inicial e a lei como referencia */
 ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma transicao tendo um estado final e inicial como refenrencia */
+void imprime_transicao(ltrans_t *list, FILE *stream);
+void imprime_conjunto(lconj_t *list, FILE *stream);
+
+
 
