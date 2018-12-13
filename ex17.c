@@ -1217,6 +1217,8 @@ ltrans_t *busca_por_ef(ltrans_t *list, int est)
 /**
  * @brief Busca uma transicao com o estado inicial e a lei como referencia
  * @param [in] list lista das transicoes
+ * @param [in] ei estado inicial (referencia)
+ * @param [in] lei lei
  * @return uma transicao
  */
 
