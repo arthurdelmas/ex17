@@ -746,6 +746,13 @@ void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s)
     return;
 }
 
+void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list)
+{
+    lconj_t *plconj= conjunto;
+    lest_t *plest, *plfinal= final;
+
+    return;
+}
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
