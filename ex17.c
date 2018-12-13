@@ -1157,7 +1157,9 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
     {
         if((plbusca= busca_transicao_lei(plist->prox, plist->ei, plist->ef)) != NULL)
         {
-
+            *pl= plist;
+            *pl2= plbusca;
+            return 1;
         }
     }
     return 0;
