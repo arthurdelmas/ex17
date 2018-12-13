@@ -1353,6 +1353,10 @@ void imprime_conjunto(lconj_t *list, FILE *stream)
     return;
 }
 
+/**
+ * @brief imprime os arvores em preordem
+ **/
+
 void imprime_arvore(t_arvore *raiz, FILE *stream)
 {
     t_arvore *pl= raiz;
