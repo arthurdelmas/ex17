@@ -817,6 +817,19 @@ void estados_limite(quintupla_t *Q)
 }
 
 /**
+ * @brief verifica se a lista das transicoes possui apenas um elemento
+ * @param [in] list lista de transicoes
+ * @return verdadeiro ou falso caso a lista seja unitaria
+ */
+
+int lista_unitaria(ltrans_t *list)
+{
+    if(!list)
+        return 0;
+    return list->prox == NULL ? 1 : 0;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
