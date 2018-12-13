@@ -1320,6 +1320,12 @@ ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
     return NULL;
 }
 
+/**
+ * @brief imprime uma lista de Transicoes
+ * @param [in] list lista de Transicoes
+ * @param [in] stream objeto onde será impresso a lista de transicoes
+ */
+
 void imprime_transicao(ltrans_t *list, FILE *stream)
 {
     ltrans_t *pl= list;
