@@ -1156,6 +1156,7 @@ void entrada_ER(char *expReg, char *entrada)
  * @param [in] list lista das transicoes
  * @param [out] pl transicao semelhante a pl2
  * @param [out] pl2 transicao semelhante a pl
+ * @return verdadeiro caso haja transicoes semelhantes, e falso para nao ha
  */
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 {
