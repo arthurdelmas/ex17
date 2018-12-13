@@ -1120,6 +1120,17 @@ void coleta_transicao(ltrans_t **list, FILE *stream)
 {
     char ch[SBUFF], *sei, *slei, *sef;
 
+    while(fgets(ch, SBUFF, stream)!= NULL)
+    {
+        if(strcmp(ch, "\n")==0)
+            return;
+        
+        sei = strtok(ch, " ");
+        slei = strtok(NULL, " ");
+        sef = strtok(NULL, " ");
+
+        insere_transicao(list, atoi(sei), slei, atoi(sef)).
+    }
 
     return;
 }
