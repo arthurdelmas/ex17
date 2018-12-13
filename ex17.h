@@ -49,91 +49,141 @@
 static int verb=0; /**< verbose level, global within the file */
 
 /* tipo lista encadeada simples dos estados finais */
-typedef struct st_lef
+typedef struct st_estlist
 {
-    unsigned short int f;
-    struct st_lef *prox;
-} t_lef;
+    int estado;
+    struct st_estlist *prox;
+} lest_t;
 
 /* tipo lista encadeada simples da funcao de transicao */
-typedef struct st_lft
+typedef struct st_translist
 {
-    unsigned short int ei;  /* estado inicial */
-    char *le;               /* le (string com rotulos) */
-    unsigned short int ef;  /* estado final */
-    struct st_lft *prox;
-} t_lft;
+    int ei;     /* estado inicial */
+    char *lei;
+    int ef;     /* estado final */
+    struct st_translist *prox;
+} ltrans_t;
+
+/* lista de conjuntos de estdados*/
+typedef struct st_conjlist
+{
+    int id;
+    struct st_estlist *estados;
+    struct st_conjlist *prox;
+}lconj_t;
 
 /* tipo quintupla: representacao formal de um automato */
 typedef struct st_quintupla
 {
-    unsigned short int K;   /* conjunto de estados */
+    int K;   /* conjunto de estados */
     char A;                 /* alfabeto */
-    unsigned short int S;   /* estado inicial */
-    t_lef *F;               /* lista de estados finais */
-    t_lft *D;               /* lista da funcao de transicao d(ei, le, ef) */
-} t_quintupla;
+    int S;   /* estado inicial */
+    lest_t *F;               /* lista de estados finais */
+    ltrans_t *D;               /* lista da funcao de transicao d(ei, le, ef) */
+}quintupla_t;
+
+typedef struct st_arvore
+{
+    char *expReg;
+    int tipo_op; /*tipo de operador, 0->nao operador, 1 ->operador unario, 2->operador binario*/
+    quintupla_t Q;
+    struct st_arvore *esq, *dir, *pai;
+}t_arvore;
+/* Variaveis Global*/
+
+int id_estado= 0;
 
 /* ---------------------------------------------------------------------- */
 /* prototypes */
 
 void help(void); /* print some help */
 void copyr(void); /* print version and copyright information */
-void exN_init(void); /* global initialization function */
-int tipo_operador(char info)
-void quebraExpressao(char *expReg, t_arvore **raiz); /*quebra a expressao e armazena na arvore binaria*/    
-void separador(char *expReg, char **partEsq, char **partDir, char *op, int size); /*separa a expressao regular no ponto pre determinado*/
-void transformacao(t_arvore *raiz); /* realiza as operacoes de acordo com a arvore binaria, na ordem pos ordem */
-void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op);
-void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao concatenacao*/
-void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2);/*operacao ou*/
-void operacao_estrela(quintupla_t *res, quintupla_t q); /* operacao estrela */
-void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal); /*Gera transicoes que dao novos estados para os estados finais*/
-void copia_lestado(lest_t **dest, lest_t *list);
-void copia_ltrans(ltrans_t **dest, ltrans_t *list);
-void mini_quintupla(quintupla_t *q, char *lei);
-void AFND_AFD_init(const char *entrada);
-void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo);
-void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo);
-int novo_estado(lest_t *list, lconj_t **conj_estados); /*gera um estado para afd*/
-void modelando_conjunto(lconj_t *simultaneo, lest_t **list);
-ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef);
-ltrans_t *busca_simultaneo(ltrans_t *list, int ref);
-lconj_t *busca_conjunto(lconj_t *list, int id);
+
+/* Tranformacao ER para AFND*/
+
+void ER_AFND_init(char *expReg); /* global initialization function */
+void entrada_ER(char *expReg, char *entrada);
+void quebraExpressao(char *expReg, t_arvore **raiz);
+void transformacao(t_arvore *raiz);
 void salva_quintupla(quintupla_t Q, char *arquivo);
-int igualdade_conjunto(lest_t *list, lest_t *list2);
-void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Copia estados para um conjunto de estados*/
-void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s); /*Manda o primeiro estado para o conjunto simultaneo*/
+
+void separador(char *expReg, char **partEsc, char **partDir, char *op, int size);
+void mini_quintupla(quintupla_t *q, char *lei);
+void transicoes_finais(ltrans_t **dest, lest_t *list, int novoFinal);
+
+void operacao_estrela(quintupla_t *res, quintupla_t q);
+void operacao_ou(quintupla_t *res, quintupla_t q1, quintupla_t q2);
+void operacao_e(quintupla_t *res, quintupla_t q1, quintupla_t q2);
+void operacao_geral(quintupla_t *res, quintupla_t q1, quintupla_t q2, char op);
+
+void copia_ltrans(ltrans_t **dest, ltrans_t *list);
+void copia_lestado(lest_t **dest, lest_t *list);
+
+int tipo_operador(char info);
+void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info);
+
+/*--------------------------------------------------------------*/
+/* ----------------------AFND para AFD--------------------------*/
+void AFND_AFD_init(const char *arquivo);
+void estados_simultaneos(quintupla_t Q, lconj_t **simultaneo); /* Gerar os estados simultaneos*/
+void estados_novos(quintupla_t Qantigo, quintupla_t *Qnovo, lconj_t *simultaneo); /* Gerar a quintupla para AFD*/
+void salva_quintupla(quintupla_t Q, char *arquivo); /* armazena uma quintupla no arquivo com o nome dado, ou imprime na tela*/
+
+void coleta_final(lest_t **list, FILE *stream); /* auxiliar da funcao entrada_dados(), coleta do arquivo os estados finais*/
+void coleta_transicao(ltrans_t **list, FILE *stream); /* auxiliar da funcao entrada_dados(), coleta do arquivo as transicoes*/
+int novo_estado(lest_t *list, lconj_t **conj_estados); /* gera um novo estado (AFD) caso não haja estado igual*/
+void modelando_conjunto(lconj_t *simultaneo, lest_t **list); /* A list entra com o conjunto de indices para os conjuntos de estados simultaneos*/
+
+int igualdade_conjunto(lest_t *list, lest_t *list2); /* verifica se dois conjuntos sao identicos*/
+void primeiro_estado(lest_t **estados, lconj_t *simultaneo, int s); /* busca entre o estados simultaneos o que o estados inicial, tal conjunto se torna o estado inicial da AFD*/
+void copia_estado(lest_t **estados, lconj_t *simultaneo, int s); /* copia um conjunto dos estados simultanenos para um conjunto separado*/
 void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list);
+
+void insere_conjunto(lconj_t **list, int id);
+void insere_conjuntoFULL(lconj_t **conjunto, lest_t *list, int id);
+
+/* ------------------------------------------------------------ */
+/* ------------------------ AFD para ER ----------------------- */
+
 void AFD_ER_init(const char *arquivo);
-void estados_limite(quintupla_t *Q);
-int lista_unitaria(ltrans_t *list);
+void coleta_transicao(ltrans_t **list, FILE *stream);
+void coleta_final(lest_t **list, FILE *stream);
+
 void uniao(ltrans_t **list);
 void concatena(ltrans_t **list, int est);
-int estado_eliminar(quintupla_t Q);
+char *estrela(ltrans_t **list, int ei_ef);
+
 void concatena_aux(char **dest, char *ch, char *ch2);
-char *estrela(ltrans_t **list, int ei_ef); /*verificacao do estado*/
-int definir_tamanho(char *ch, char *ch2); /* define o tamanho da memoria*/
-void entrada_Automato(quintupla_t *Q, const char *entrada); /*Coleta arquivo de entrada da quintupla AFND*/
-void coleta_final(lest_t **list, FILE *stream); /*Coleta e armazena os estados finais do arquivo de entrada*/
-void coleta_transicao(ltrans_t **list, FILE *stream); /*Coleta transicoes do arquivo da quintupla AFND*/
-void entrada_ER(char *expReg, char *entrada); /*Ler e armazena a ER*/
-int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
-ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estado inicial */
-ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
-ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei); /* busca uma transicao com o estado inicial e a lei como referencia */
-ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma transicao tendo um estado final e inicial como refenrencia */
-void imprime_transicao(ltrans_t *list, FILE *stream);
-void imprime_conjunto(lconj_t *list, FILE *stream);
-void imprime_arvore(t_arvore *raiz, FILE *stream);
-void insere_conjunto(lconj_t **list, int id);
-void insere_conjunto(lconj_t **list, int id);
+void estados_limite(quintupla_t *Q);
+int lista_unitaria(ltrans_t *list);
+int definir_tamanho(char *ch, char *ch2);
+int estado_eliminar(quintupla_t Q);
+int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2);
+
+/* ------------------------------------------------------------ */
+/*----------------------- Geral ------------------------------- */
+
+void entrada_Automato(quintupla_t *Q, const char *entrada); /* coleta a quintupla de arquivo formatado especifico*/
+
 void insere_estado(lest_t **list, int est);
 void insere_transicao(ltrans_t **list, int ei, char *lei, int ef);
-void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info);
+
+void imprime_transicao(ltrans_t *list, FILE *stream);
+void imprime_estados(lest_t *list, FILE *stream);
+void imprime_arvore(t_arvore *raiz, FILE *stream);
+
+lconj_t *busca_conjunto(lconj_t *list, int id);
+ltrans_t *busca_simultaneo(ltrans_t *list, int ref); /* Busca uma transicao cujo o estado de referencia (ref) seja simutaneo*/
+ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei);
+ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef);
+ltrans_t *busca_por_ei(ltrans_t *list, int est);
+ltrans_t *busca_por_ef(ltrans_t *list, int est);
+
 void remove_estado(lest_t **list, lest_t *r);
 void remove_transicao(ltrans_t **list, ltrans_t *r);
-void apaga_estados(lest_t **list);
-void apaga_transicao(ltrans_t **list);
 void remove_conjunto(lconj_t **list, lconj_t *r);
+void apaga_estados(lest_t **list);
 void apaga_conjunto(lconj_t **list);
+void apaga_transicao(ltrans_t **list);
+
+/* --------------------------------------------------- */
