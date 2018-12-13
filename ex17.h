@@ -109,7 +109,7 @@ void concatena(ltrans_t **list, int est);
 int estado_eliminar(quintupla_t Q);
 void concatena_aux(char **dest, char *ch, char *ch2);
 char *estrela(ltrans_t **list, int ei_ef); /*verificacao do estado*/
-
+nt definir_tamanho(char *ch, char *ch2); /* define o tamanho da memoria*/
 
 
 
