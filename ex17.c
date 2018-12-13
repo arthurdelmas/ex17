@@ -1565,6 +1565,36 @@ void remove_estado(lest_t **list, lest_t *r)
 }
 
 /**
+ * @brief remove um elemento da lista das transicoes
+ * @param [out] list lista de estados
+ * @param [in] r elemento a ser eliminado
+ */
+
+void remove_transicao(ltrans_t **list, ltrans_t *r)
+{
+    ltrans_t *pl= *list, *plant= NULL;
+
+    while(pl!= NULL)
+    {
+        if(pl == r)
+            break;
+        plant= pl;
+        pl= pl->prox;
+    }
+
+    if(!pl)
+        return;
+
+    if(!plant)
+        *list= pl->prox;
+    else
+        plant->prox= pl->prox;
+
+    free(pl);
+    return;
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
