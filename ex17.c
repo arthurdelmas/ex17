@@ -1416,6 +1416,12 @@ void insere_conjuntoFULL(lconj_t **conjunto, lest_t *list, int id)
     }
     return;
 }
+/**
+ * @brief cria uma lista e atribui novos elementos a lista de estados
+ * @param [out] list lista de estados
+ * @param [in] est estado(valor) a ser atribuido na lista
+ * */
+
 void insere_estado(lest_t **list, int est)
 {
     lest_t *pl= *list, *plant= NULL;
