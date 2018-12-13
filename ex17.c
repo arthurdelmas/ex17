@@ -1198,7 +1198,7 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est)
  * @brief Busca uma transicao usando apenas o estado final como referencia de busca
  * @param [in] list lista das transicoes
  * @param [in] est estado final (referencia)
- *
+ * @return transicao com o estado final est 
  */
 
 ltrans_t *busca_por_ef(ltrans_t *list, int est)
