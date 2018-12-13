@@ -118,4 +118,5 @@ int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca p
 ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no estado inicial */
 ltrans_t *busca_por_ef(ltrans_t *list, int est); /* busca por transicoes no estado final */
 ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei); /* busca uma transicao com o estado inicial e a lei como referencia */
+ltrans_t *busca_transicao_lei(ltrans_t *list, int ei, int ef) /* busca uma transicao tendo um estado final e inicial como refenrencia */
 
