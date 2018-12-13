@@ -133,3 +133,4 @@ void insere_transicao(ltrans_t **list, int ei, char *lei, int ef);
 void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info);
 void remove_estado(lest_t **list, lest_t *r);
 void remove_transicao(ltrans_t **list, ltrans_t *r);
+void apaga_estados(lest_t **list);
