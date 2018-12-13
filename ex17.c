@@ -733,6 +733,12 @@ lconj_t *busca_conjunto(lconj_t *list, int id)
     return NULL;
 }
 
+/**
+ * @brief salva um quintupla no arquivo caso dado o nome, caso nao imprime na tela
+ * @param [in] Q quintupla
+ * @param [in] arquivo nome do aquivo
+ */
+
 void salva_quintupla(quintupla_t Q, char *arquivo)
 {
     FILE *pf;
