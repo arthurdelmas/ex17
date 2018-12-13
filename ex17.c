@@ -1612,6 +1612,22 @@ void apaga_estados(lest_t **list)
 }
 
 /**
+ * @brief apaga toda uma lista de transicoes
+ * @param [in,out] list lista de transicoes
+ */
+
+void apaga_transicao(ltrans_t **list)
+{
+    ltrans_t *pl= *list;
+
+    while(pl!= NULL)
+    {
+        remove_transicao(list, pl);
+        pl= *list;
+    }
+}
+
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
