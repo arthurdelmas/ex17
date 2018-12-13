@@ -1416,6 +1416,36 @@ void insere_conjuntoFULL(lconj_t **conjunto, lest_t *list, int id)
     }
     return;
 }
+void insere_estado(lest_t **list, int est)
+{
+    lest_t *pl= *list, *plant= NULL;
+
+     while(pl!= NULL)
+     {
+         if(pl->estado > est)
+             break;
+         else if(pl->estado == est)
+             return;
+
+         plant= pl;
+         pl= pl->prox;
+     }
+     pl= malloc(sizeof(lest_t));
+     pl->estado= est;
+     pl->prox= NULL;
+
+     if(!plant)
+     {
+         pl->prox= *list;
+         *list= pl;
+     }
+     else
+     {
+         pl->prox= plant->prox;
+         plant->prox= pl;
+     }
+     return;
+}
 
 
 /**
