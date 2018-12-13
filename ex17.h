@@ -104,6 +104,6 @@ void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list);
 void AFD_ER_init(const char *arquivo);
 void estados_limite(quintupla_t *Q);
 int lista_unitaria(ltrans_t *list);
-
+void uniao(ltrans_t **list);
 
 
