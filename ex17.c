@@ -770,6 +770,34 @@ void definir_final(lconj_t *conjunto, lest_t *final, lest_t **list)
 
     return;
 }
+
+/**
+ * @brief  inicia a conversão de AFD para ER.
+ */
+
+void AFD_ER_init(const char *arquivo)
+{
+    IFDEBUG("ex12_init()");
+
+    int estado;
+    quintupla_t Q;
+
+    entrada_Automato(&Q, arquivo);
+
+    estados_limite(&Q);
+
+    while(!lista_unitaria(Q.D))
+    {
+        uniao(&Q.D);
+
+        estado= estado_eliminar(Q);
+
+        concatena(&Q.D, estado);
+    }
+    fprintf(stdout, "Expressao Regular: %s\n", Q.D->lei);
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
