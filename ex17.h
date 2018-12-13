@@ -130,4 +130,4 @@ void insere_conjunto(lconj_t **list, int id);
 void insere_conjunto(lconj_t **list, int id);
 void insere_estado(lest_t **list, int est);
 void insere_transicao(ltrans_t **list, int ei, char *lei, int ef);
-
+void insere_arvore(t_arvore **raiz, t_arvore *ant, char *info);
