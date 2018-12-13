@@ -1627,6 +1627,30 @@ void apaga_transicao(ltrans_t **list)
     }
 }
 
+void remove_conjunto(lconj_t **list, lconj_t *r)
+{
+    lconj_t *pl= *list, *plant= NULL;
+
+    while(pl!= NULL)
+    {
+        if(pl == r)
+            break;
+        plant= pl;
+        pl= pl->prox;
+    }
+
+    if(!pl)
+        return;
+
+    if(!plant)
+        *list= pl->prox;
+    else
+        plant->prox= pl->prox;
+
+    free(pl);
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
