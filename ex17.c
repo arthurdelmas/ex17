@@ -1151,6 +1151,12 @@ void entrada_ER(char *expReg, char *entrada)
 
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2)
 {
+    ltrans_t *plist= list, *plbusca;
+    
+    while(plist!= NULL)
+    {
+
+    }
     return 0;
 }
 /**
