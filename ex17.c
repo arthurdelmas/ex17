@@ -1028,6 +1028,33 @@ char *estrela(ltrans_t **list, int ei_ef)
 }
 
 /**
+ * @brief define o tamanho de memoria que sera usada para armazena duas leis
+ * @param [in] ch lei 1
+ * @param [in] ch2 lei 2
+ * @return o tamanho de bytes necessarios
+ */
+
+int definir_tamanho(char *ch, char *ch2)
+{
+    int tamanho= 0;
+
+    if(strcmp(ch, "E")!= 0)
+    {
+        tamanho+= strlen(ch) +1; /*para o ponto ou \0 */
+        if(strlen(ch)>1)
+            tamanho+= 2; /*2 para os parenteses*/
+    }
+
+    if(strcmp(ch2, "E")!= 0)
+    {
+        tamanho+= strlen(ch) + 1; /* para o \0*/
+        if(strlen(ch) > 1)
+            tamanho+= 2; /*2 para os parenteses*/
+    }
+
+    return tamanho > 0 ? tamanho : 2;
+}    
+/**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
  * @details Prints help information (usually called by opt -h)
