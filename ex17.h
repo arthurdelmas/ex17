@@ -115,3 +115,5 @@ void coleta_final(lest_t **list, FILE *stream); /*Coleta e armazena os estados f
 void coleta_transicao(ltrans_t **list, FILE *stream) /*Coleta transicoes do arquivo da quintupla AFND*/
 void entrada_ER(char *expReg, char *entrada) /*Ler e armazena a ER*/
 int busca_semelhantes(ltrans_t *list, ltrans_t **pl, ltrans_t **pl2); /* busca por transicoes */
+ltrans_t *busca_por_ei(ltrans_t *list, int est); /* busca de transicoes no espaco inicial */
+
