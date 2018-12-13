@@ -1200,7 +1200,6 @@ ltrans_t *busca_por_ei(ltrans_t *list, int est)
  * @param [in] est estado final (referencia)
  * @return transicao com o estado final est 
  */
-
 ltrans_t *busca_por_ef(ltrans_t *list, int est)
 {
     ltrans_t *pl= list;
@@ -1211,6 +1210,13 @@ ltrans_t *busca_por_ef(ltrans_t *list, int est)
             return pl;
         pl= pl->prox;
     }
+
+    return NULL;
+}
+
+ltrans_t *busca_transicao(ltrans_t *list, int ei, char *lei)
+{
+    ltrans_t *pl= list;
 
     return NULL;
 }
