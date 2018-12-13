@@ -943,6 +943,13 @@ void concatena(ltrans_t **list, int est)
     return;
 }
 
+/**
+ * @brief Funcao que contatena (atribui) duas leis numa string
+ * @param [out] lei concatenada
+ * @param [in] ch lei 1
+ * @param [in] ch2 lei 2
+ **/
+
 void concatena_aux(char **dest, char *ch, char *ch2)
 {
     *dest= malloc(definir_tamanho(ch, ch2) * sizeof(char));
