@@ -1651,6 +1651,20 @@ void remove_conjunto(lconj_t **list, lconj_t *r)
     return;
 }
 
+void apaga_conjunto(lconj_t **list)
+{
+    lconj_t *pl= *list;
+
+    while(pl!= NULL)
+    {
+        apaga_estados(&pl->estados);
+        remove_conjunto(list, pl);
+        pl= *list;
+    }
+
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
