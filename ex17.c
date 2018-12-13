@@ -899,6 +899,44 @@ int estado_eliminar(quintupla_t Q)
     }
     return menor;
 }
+void concatena(ltrans_t **list, int est)
+{
+    ltrans_t *pl= *list, *pl2, *plr, *pl2r, res;
+    char *chstar, *aux;
+
+    chstar= estrela(list, est); /* verifica se o estado selecionado possui a estrela*/
+
+    while((pl= busca_por_ef(pl, est)) != NULL) /* procurando por transicoes que terminam com o estado de referencia (est)*/
+    {
+        pl2= *list;
+        while((pl2= busca_por_ei(pl2, est))!= NULL) /* procurando por transicoes que inicia com o 'est'*/
+        {
+            /* Processo de concatenacao*/
+            res.ei= pl->ei;
+
+            if(chstar!= NULL)
+            {
+                concatena_aux(&aux, pl->lei, chstar);
+                concatena_aux(&res.lei, aux, pl2->lei);
+            }
+            else
+                concatena_aux(&res.lei, pl->lei, pl2->lei);
+            res.ef= pl2->ef;
+
+            insere_transicao(list, res.ei, res.lei, res.ef);
+           /* ---------------------------------- */
+
+           pl2r= pl2;
+           pl2= pl2->prox;
+           remove_transicao(list, pl2r);
+        }
+        plr= pl;
+        pl= pl->prox;
+        remove_transicao(list, plr);
+    }
+    return;
+}
+
 /**
  * @ingroup GroupUnique
  * @brief Prints help information and exit
